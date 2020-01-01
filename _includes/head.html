@@ -1,0 +1,23 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="googlebot" content="noindex">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Cache-control" content="public">
+  {% assign lang = site.lang %}
+  <title>{{site.data[lang].config.title}}</title>
+  <meta name="keys" content="{{site.data[lang].config.meta_keys}}">
+  <meta property="og:title" content="{{site.data[lang].config.title}}">
+  <meta property="og:type" content="article">
+  <!-- for google -->
+  <meta itemprop="name" content="{{site.data[lang].config.title}}">
+  <meta itemprop="description" content="{{site.data[lang].config.description}}">
+  {% if page.image %}
+  <meta itemprop="image" content="{{site.url}}{{page.image}}">
+  {% endif %}
+
+  {% include head_links.html %}
+  {% include head_search.html %}
+  {%- if site.environment == 'production' and site.google_analytics -%}
+  {%- include google-analytics.html -%}
+  {%- endif -%}
+</head>

@@ -1,0 +1,23 @@
+<!--
+<script src="{{ site.url }}/js/ScrollMagic.min.js""></script>
+	<script src=" {{ site.url }}/js/debug.addIndicators.min.js""> </script> 
+
+	<script>
+    // init controller
+    var controller = new ScrollMagic.Controller({ globalSceneOptions: { duration: 1500 } });
+    // build scenes
+    {% for item in site.data.nav.items %}
+    new ScrollMagic.Scene({ triggerElement: "#{{item.link}}" })
+      .setClassToggle("#nav_{{item.link}}", "active") // add class toggle
+      // .addIndicators() // add indicators (requires plugin)
+      .addTo(controller);
+    {% endfor %}
+  </script>
+  -->
+  <!--{% if page.tipue_search_active %} -->
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+  <!--{% endif %} -->

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+{%- include head.html -%}
+
+<body>
+	{%- include header.html -%}
+	<main class="page-content" aria-label="Content">
+		{% include left_sidebar.html %}
+		<div>
+			<div class="search_box">
+				<div id="tipue_search_content"></div>
+			</div>
+			{{ content }}
+		</div>
+		{% include right_sidebar.html %}
+	</main>
+	{%- include footer.html -%}
+
+ </body>
+</html>
