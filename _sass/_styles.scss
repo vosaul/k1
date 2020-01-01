@@ -1,6 +1,5 @@
 body {
   display: grid;
-  grid-template-rows: 70px 1fr;
 }
 .hidden {
   display: none;
@@ -122,7 +121,36 @@ body {
   z-index: 100;
   top: 100px;
   padding: 20px;
-  background: #eee;
+  border-bottom: 1px solid #bbb;
+  .tipue_search_result {
+    margin: 10px;
+    #tipue_search_results_count {
+      margin-top: 100px;
+      font-size: 15px;
+      font-weight: 400;
+      padding: 10px 0;
+    }
+    .tipue_search_content_url {
+      display: none;
+    }
+    .tipue_search_content_text {
+      font-size: 15px;
+      font-weight: 400;
+      .tipue_search_content_bold {
+        font-weight: 600;
+        color: #000;
+      }
+    }
+    #tipue_search_image_modal {
+      display: none;
+      .tipue_search_image_close {
+        display: none;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+      }
+    }
+  }
 }
 footer {
   height: 80px;

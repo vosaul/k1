@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-01T16:02:25+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2019/12/30/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2019-12-30T08:40:50+02:00</published><updated>2019-12-30T08:40:50+02:00</updated><id>http://localhost:4000/jekyll/update/2019/12/30/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2019/12/30/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-01T16:55:31+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2019/12/30/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2019-12-30T08:40:50+02:00</published><updated>2019-12-30T08:40:50+02:00</updated><id>http://localhost:4000/jekyll/update/2019/12/30/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2019/12/30/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
 
 &lt;p&gt;Jekyll requires blog post files to be named according to the following format:&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YEAR-MONTH-DAY-title.MARKUP&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;YEAR-MONTH-DAY-title.MARKUP&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YEAR&lt;/code&gt; is a four-digit number, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MONTH&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DAY&lt;/code&gt; are both two-digit numbers, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MARKUP&lt;/code&gt; is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+&lt;p&gt;Where &lt;code class=&quot;highlighter-rouge&quot;&gt;YEAR&lt;/code&gt; is a four-digit number, &lt;code class=&quot;highlighter-rouge&quot;&gt;MONTH&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;DAY&lt;/code&gt; are both two-digit numbers, and &lt;code class=&quot;highlighter-rouge&quot;&gt;MARKUP&lt;/code&gt; is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
 
 &lt;h2 id=&quot;code-snippets&quot;&gt;Code snippets&lt;/h2&gt;
 
@@ -128,7 +128,7 @@
   &lt;li&gt;Clone this repo.&lt;/li&gt;
   &lt;li&gt;In Chrome, open the Extensions settings. (Wrench button, Tools, Extensions.)&lt;/li&gt;
   &lt;li&gt;On the Extensions settings page, click the “Developer Mode” checkbox.&lt;/li&gt;
-  &lt;li&gt;Click the now-visible “Load unpacked extension…” button. Navigate to the directory where you cloned the repo, then the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src&lt;/code&gt; directory under that.&lt;/li&gt;
+  &lt;li&gt;Click the now-visible “Load unpacked extension…” button. Navigate to the directory where you cloned the repo, then the &lt;code class=&quot;highlighter-rouge&quot;&gt;src&lt;/code&gt; directory under that.&lt;/li&gt;
   &lt;li&gt;The &lt;em&gt;Markdown Here&lt;/em&gt; extension should now be visible in your extensions list.&lt;/li&gt;
   &lt;li&gt;Reload your webmail page (and maybe application) before trying to convert an email.&lt;/li&gt;
 &lt;/ol&gt;
@@ -207,9 +207,9 @@ alert('Hello syntax highlighting.');
 
 &lt;h3 id=&quot;replies&quot;&gt;Replies&lt;/h3&gt;
 
-&lt;p&gt;In Gmail, Thunderbird, and Google Groups, you can use “Markdown Toggle” normally: just write your reply (top, bottom, inline, wherever) and then convert. The original email that you’re replying to will be left alone. (Technically: Existing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;blockquote&lt;/code&gt; blocks will be left intact.)&lt;/p&gt;
+&lt;p&gt;In Gmail, Thunderbird, and Google Groups, you can use “Markdown Toggle” normally: just write your reply (top, bottom, inline, wherever) and then convert. The original email that you’re replying to will be left alone. (Technically: Existing &lt;code class=&quot;highlighter-rouge&quot;&gt;blockquote&lt;/code&gt; blocks will be left intact.)&lt;/p&gt;
 
-&lt;p&gt;In Hotmail and Yahoo (which don’t put the original in a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;blockquote&lt;/code&gt;), and optionally in Gmail, Thunderbird, and Google Groups, you can ensure that only the part of the reply that you wrote gets converted by selecting what you want to convert and then clicking “Markdown Toggle” – see the next section.&lt;/p&gt;
+&lt;p&gt;In Hotmail and Yahoo (which don’t put the original in a &lt;code class=&quot;highlighter-rouge&quot;&gt;blockquote&lt;/code&gt;), and optionally in Gmail, Thunderbird, and Google Groups, you can ensure that only the part of the reply that you wrote gets converted by selecting what you want to convert and then clicking “Markdown Toggle” – see the next section.&lt;/p&gt;
 
 &lt;h3 id=&quot;selectionpiecemeal-conversion&quot;&gt;Selection/Piecemeal Conversion&lt;/h3&gt;
 
@@ -268,9 +268,9 @@ alert('Hello syntax highlighting.');
   &lt;li&gt;
     &lt;p&gt;Images embedded inline in your Markdown will be retained when you “Markdown Toggle”. Gmail allows you to put images inline in your email – this can be much easier than referencing an external image.&lt;/p&gt;
   &lt;/li&gt;
-  &lt;li&gt;Email signatures are automatically excluded from conversion. Specifically, anything after the semi-standard &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;'-- '&lt;/code&gt; (note the trailing space) is left alone.
+  &lt;li&gt;Email signatures are automatically excluded from conversion. Specifically, anything after the semi-standard &lt;code class=&quot;highlighter-rouge&quot;&gt;'-- '&lt;/code&gt; (note the trailing space) is left alone.
     &lt;ul&gt;
-      &lt;li&gt;Note that Hotmail and Yahoo do &lt;em&gt;not&lt;/em&gt; automatically add the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;'-- '&lt;/code&gt; to signatures, so you have to add it yourself.&lt;/li&gt;
+      &lt;li&gt;Note that Hotmail and Yahoo do &lt;em&gt;not&lt;/em&gt; automatically add the &lt;code class=&quot;highlighter-rouge&quot;&gt;'-- '&lt;/code&gt; to signatures, so you have to add it yourself.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;
@@ -279,7 +279,7 @@ alert('Hello syntax highlighting.');
   &lt;li&gt;Styling:
     &lt;ul&gt;
       &lt;li&gt;The use of browser-specific styles (-moz-, -webkit-) should be avoided. If used, they may not render correctly for people reading the email in a different browser from the one where the email was sent.&lt;/li&gt;
-      &lt;li&gt;The use of state-dependent styles (like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a:hover&lt;/code&gt;) don’t work because they don’t match at the time the styles are made explicit. (In email, styles must be explicitly applied to all elements – stylesheets get stripped.)&lt;/li&gt;
+      &lt;li&gt;The use of state-dependent styles (like &lt;code class=&quot;highlighter-rouge&quot;&gt;a:hover&lt;/code&gt;) don’t work because they don’t match at the time the styles are made explicit. (In email, styles must be explicitly applied to all elements – stylesheets get stripped.)&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;For more tweaky features, visit the &lt;a href=&quot;https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks&quot;&gt;Tips and Tricks&lt;/a&gt; section.&lt;/li&gt;
@@ -287,24 +287,24 @@ alert('Hello syntax highlighting.');
 
 &lt;h2 id=&quot;building-the-extension-bundles&quot;&gt;Building the Extension Bundles&lt;/h2&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd utils
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd utils
 node build.js
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;chrome-and-opera-extension&quot;&gt;Chrome and Opera extension&lt;/h3&gt;
 
-&lt;p&gt;Create a file with a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.zip&lt;/code&gt; extension containing these files and directories:&lt;/p&gt;
+&lt;p&gt;Create a file with a &lt;code class=&quot;highlighter-rouge&quot;&gt;.zip&lt;/code&gt; extension containing these files and directories:&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;manifest.json
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;manifest.json
 common/
 chrome/
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;firefoxthunderbird-extension&quot;&gt;Firefox/Thunderbird extension&lt;/h3&gt;
 
-&lt;p&gt;Create a file with a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.xpi&lt;/code&gt; extension containing these files and directories:&lt;/p&gt;
+&lt;p&gt;Create a file with a &lt;code class=&quot;highlighter-rouge&quot;&gt;.xpi&lt;/code&gt; extension containing these files and directories:&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;chrome.manifest
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;chrome.manifest
 install.rdf
 common/
 firefox/
@@ -312,7 +312,7 @@ firefox/
 
 &lt;h3 id=&quot;safari-extension&quot;&gt;Safari extension&lt;/h3&gt;
 
-&lt;p&gt;The browser-specific code is located in the &lt;a href=&quot;https://github.com/adam-p/markdown-here-safari&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;markdown-here-safari&lt;/code&gt;&lt;/a&gt; project.&lt;/p&gt;
+&lt;p&gt;The browser-specific code is located in the &lt;a href=&quot;https://github.com/adam-p/markdown-here-safari&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;markdown-here-safari&lt;/code&gt;&lt;/a&gt; project.&lt;/p&gt;
 
 &lt;p&gt;Use the Safari Extension Builder.&lt;/p&gt;
 
@@ -342,7 +342,7 @@ firefox/
 
 &lt;h3 id=&quot;code&quot;&gt;Code&lt;/h3&gt;
 
-&lt;p&gt;MIT License: http://adampritchard.mit-license.org/ or see &lt;a href=&quot;https://github.com/adam-p/markdown-here/blob/master/LICENSE&quot;&gt;the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LICENSE&lt;/code&gt; file&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;MIT License: http://adampritchard.mit-license.org/ or see &lt;a href=&quot;https://github.com/adam-p/markdown-here/blob/master/LICENSE&quot;&gt;the &lt;code class=&quot;highlighter-rouge&quot;&gt;LICENSE&lt;/code&gt; file&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&quot;logo&quot;&gt;Logo&lt;/h3&gt;
 
@@ -448,7 +448,7 @@ This line is part of the same quote.&lt;/p&gt;
 
 &lt;h3 id=&quot;code-with-syntax-highlighting&quot;&gt;Code with syntax highlighting&lt;/h3&gt;
 
-&lt;p&gt;This is a test of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;some inline code&lt;/code&gt; and whether it formats &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;correctly&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This is a test of &lt;code class=&quot;highlighter-rouge&quot;&gt;some inline code&lt;/code&gt; and whether it formats &lt;code class=&quot;highlighter-rouge&quot;&gt;correctly&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;And now for blocks of code:&lt;/p&gt;
 
@@ -483,17 +483,17 @@ This line is part of the same quote.&lt;/p&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
       &lt;td&gt;Single backticks&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;'Isn't this fun?'&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;'Isn't this fun?'&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;‘Isn’t this fun?’&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Quotes&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;Isn't this fun?&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Isn't this fun?&quot;&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;“Isn’t this fun?”&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Dashes&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-- is en-dash, --- is em-dash&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-- is en-dash, --- is em-dash&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;– is en-dash, — is em-dash&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
@@ -512,7 +512,7 @@ This line is part of the same quote.&lt;/p&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
       &lt;td&gt;&lt;em&gt;Still&lt;/em&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;renders&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;renders&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;&lt;strong&gt;nicely&lt;/strong&gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;

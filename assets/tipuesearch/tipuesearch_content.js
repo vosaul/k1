@@ -5,7 +5,7 @@
 {%- if counter != 0 -%}
 var tipuesearch = {"pages": [
 {% for post in site.posts %}
-{%- assign text = post.content | 
+{%- assign text = post.description | 
   strip_newlines |
   replace: '/', " " | 
   replace: '=', " " | 
