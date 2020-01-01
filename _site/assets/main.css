@@ -352,3 +352,5 @@ body { display: grid; }
 .search_box .tipue_search_result #tipue_search_image_modal .tipue_search_image_close { display: none; position: absolute; top: 20px; left: 20px; }
 
 footer { height: 80px; display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 57px; align-items: center; justify-items: center; font-size: 15px; font-weight: 400; border-top: 1px solid #aaa; background: #eee; }
+
+/*# sourceMappingURL=main.css.map */
