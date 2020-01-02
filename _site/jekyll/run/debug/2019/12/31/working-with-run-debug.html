@@ -28,7 +28,7 @@
 <script src="http://localhost:4000/assets/tipuesearch/tipuesearch.min.js" ></script>
 </head><body><header class="top_header">
     <a href="http://localhost:4000" class="logo">Logo</a>
-    <form class="top_search" action="/2017/05/24/Markdownsource.html">
+    <form class="top_search" action="/jekyll/run/debug/2019/12/31/working-with-run-debug.html">
       <div class="tipue_search_left"><img src="/assets/tipuesearch/search.png"
           class="tipue_search_icon"></div>
       <div class="tipue_search_right"><input type="text" name="q" id="tipue_search_input" pattern=".{3,}"
@@ -206,195 +206,50 @@
 			<article class="post h-entry wrapper" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="post_grid">
         <div class="post-header">
-            <h1 class="post-title p-name" id="markdownsource" itemprop="name headline">MARKDOWNSOURCE</h1>
+            <h1 class="post-title p-name" id="work-with-run/debug-configurations" itemprop="name headline">WORK WITH RUN/DEBUG CONFIGURATIONS</h1>
             <p class="post-meta">
-                <time class="dt-published" datetime="2017-05-24T00:00:00+03:00" itemprop="datePublished">May 24, 2017
+                <time class="dt-published" datetime="2019-12-31T08:40:50+02:00" itemprop="datePublished">Dec 31, 2019
       </time></p>
         </div>
 
         <div class="post-content e-content" itemprop="articleBody">
-            <h1 id="sources-for-markdown">Sources for markdown</h1>
+            <p>To run or debug your code in PyCharm, you can use numerous run/debug configurations. Each run/debug configuration represents a named set of run/debug startup properties. When you perform run, debug, or test operations with PyCharm, you always start a process based on one of the existing configurations using its parameters.</p>
 
-<p>https://www.markdownguide.org/cheat-sheet/</p>
+<p>PyCharm comes with a number of run/debug configuration types for the various running, debugging and testing issues. You can create your own run/debug configurations of specific types.</p>
 
-<p>http://sangsoonam.github.io/2019/01/20/syntax-highlighting-in-jekyll.html</p>
+<p>Each run/debug configuration type has its own default settings. Whenever a new run/debug configuration of the respective type is created, it is based on these default settings.</p>
 
-<p>Style inspiration for the site layout:</p>
+<p>Temporary run/debug configurations﻿
+A temporary run/debug configuration is automatically created every time you choose Run <item_name> or Debug <item_name> for an item without a permanent configuration.</item_name></item_name></p>
 
-<p>https://www.jetbrains.com/help/pycharm/quick-start-guide.html</p>
+<p>Temporary Run/Debug configurations are recorded in the <project directory="">/.idea/workspace.xml file under the Run Manager section.</project></p>
 
-<h1 id="heading-one">Heading One</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae felis vitae leo ornare auctor. Aenean nec magna elementum, euismod lectus et, commodo magna. Nunc eget urna in nisl tempor rutrum a in augue.</p>
+<p>Save a temporary configuration as permanent﻿
+Select the temporary configuration in the Run/Debug Configurations Dialog and click the Save button on the toolbar.</p>
 
-<p>Integer eu aliquet turpis. Sed ipsum diam, fermentum non leo et, imperdiet faucibus enim. Aenean fringilla ornare tortor porta auctor. Maecenas placerat purus vitae mi pulvinar, eu ornare purus gravida.</p>
+<p>Alternatively, select the temporary configuration in the run/debug configuration selector and then click Save <configuration name=""> Configuration.</configuration></p>
 
-<h1 id="heading-one-1">Heading One</h1>
-<h2 id="heading-two">Heading Two</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae felis vitae leo ornare auctor. Aenean nec magna elementum, euismod lectus et, commodo magna. Nunc eget urna in nisl tempor rutrum a in augue.</p>
+<p>Once you save a temporary configuration it becomes permanent and it is recorded in a separate XML file in the <project directory="">/.idea/ directory. For example, MyProject/.idea/Car.xml.</project></p>
 
-<h3 id="heading-three">Heading Three</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae felis vitae leo ornare auctor. Aenean nec magna elementum, euismod lectus et, commodo magna. Nunc eget urna in nisl tempor rutrum a in augue.</p>
+<p>Temporary configurations are marked with semi-transparent icons and are managed the same way as the permanent configurations.</p>
 
-<h4 id="heading-four">Heading Four</h4>
-<h5 id="heading-five">Heading Five</h5>
-<h6 id="heading-six">Heading Six</h6>
+<p>By default, five temporary run/debug configurations are allowed per project, so when you create the sixth configuration, the one created first is removed, and so on. To change this limit, use the Temporary configurations limit field in the Templates page of the Run/Debug Configurations Dialog.</p>
 
-<p>Unordered list</p>
-<ul>
-  <li>This is a list 1</li>
-  <li>This is a <strong>list</strong> 2, with some <strong>bold</strong> and some <em>italics</em>. And some <strong><em>bold and italics</em></strong></li>
-  <li>This is a list 3</li>
-</ul>
+<p>Permanent run/debug configurations﻿
+A permanent run/debug configuration is explicitly created for a particular class or method. If there is no permanent configuration for an item, PyCharm automatically creates a temporary configuration for it, when you choose Run <item_name> or Debug <item_name> from the context menu of this class or method.</item_name></item_name></p>
 
-<p>Ordered list</p>
-<ol>
-  <li>First item</li>
-  <li>Second item</li>
-  <li>Third item</li>
-</ol>
+<p>Run/debug configuration templates﻿
+The templates with default run/debug configuration settings are listed in the Run/Debug Configurations dialog under the Templates node. They denote the settings that are used when new run/debug configurations are created.</p>
 
-<p>Indented list</p>
-<ul>
-  <li>First item</li>
-  <li>Second item</li>
-  <li>Third item
-    <ul>
-      <li>Indented item</li>
-      <li>Indented item</li>
-    </ul>
-  </li>
-  <li>Fourth item</li>
-</ul>
+<p>Do not set up a working directory for the default Run/Debug Configurations listed under the Templates node. This may lead to unresolved targets in newly created Run/Debug Configurations.</p>
 
-<h3 id="underline">Underline</h3>
+<p>You can set the default settings for a specific configuration type that will become applicable to any run/debug configuration of this type created later. Changing defaults does not affect the existing run/debug configurations.</p>
 
-<p>Does it work?</p>
-
-<hr />
-
-<p>Yes it does.</p>
-
-<h3 id="blockquotes">Blockquotes</h3>
-
-<blockquote>
-  <p>Blockquotes are very handy
-This line is part of the same quote.</p>
-</blockquote>
-
-<p>Quote break.</p>
-
-<blockquote>
-  <p>This is a very long line that will still be quoted properly when it wraps. Oh boy let’s keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can <em>put</em> <strong>Markdown</strong> into a blockquote.</p>
-</blockquote>
-
-<ul>
-  <li>The workspace synchronization will sync all your files, folders and settings automatically. This will allow you to fetch your workspace on any other device.
-    <blockquote>
-      <p>This is a blockquoteTo start syncing your workspace, just sign in with Google in the menu.</p>
-    </blockquote>
-  </li>
-</ul>
-
-<p>Blockquotes can be nested</p>
-
-<blockquote>
-  <p>Dorothy followed her through many of the beautiful rooms in her castle.</p>
-
-  <blockquote>
-    <p>The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.</p>
-  </blockquote>
-</blockquote>
-
-<h3 id="code-with-syntax-highlighting">Code with syntax highlighting</h3>
-
-<p>This is a test of <code class="highlighter-rouge">some inline code</code> and whether it formats <code class="highlighter-rouge">correctly</code>.</p>
-
-<p>And now for blocks of code:</p>
-
-<p>Ruby code</p>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
-<span class="k">end</span>
-<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
-<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span>
-</code></pre></div></div>
-
-<p>Python code</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">"Hello World"</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="s">"""a docstring"""</span>
-    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
-</code></pre></div></div>
-
-<h3 id="tables">Tables</h3>
-
-<p>SmartyPants converts ASCII punctuation characters into “smart” typographic punctuation HTML entities. For example:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th> </th>
-      <th>ASCII</th>
-      <th>HTML</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Single backticks</td>
-      <td><code class="highlighter-rouge">'Isn't this fun?'</code></td>
-      <td>‘Isn’t this fun?’</td>
-    </tr>
-    <tr>
-      <td>Quotes</td>
-      <td><code class="highlighter-rouge">"Isn't this fun?"</code></td>
-      <td>“Isn’t this fun?”</td>
-    </tr>
-    <tr>
-      <td>Dashes</td>
-      <td><code class="highlighter-rouge">-- is en-dash, --- is em-dash</code></td>
-      <td>– is en-dash, — is em-dash</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Try again:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Markdown</th>
-      <th>Less</th>
-      <th>Pretty</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><em>Still</em></td>
-      <td><code class="highlighter-rouge">renders</code></td>
-      <td><strong>nicely</strong></td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <td>What</td>
-      <td>is</td>
-      <td>up</td>
-    </tr>
-    <tr>
-      <td>What</td>
-      <td>is</td>
-      <td>up</td>
-    </tr>
-  </tbody>
-</table>
+<p>The process of editing per-type default configuration settings is described in Change Templates of Run/Debug Configurations. The process of creating or editing custom run/debug configurations is described in Create and Edit Run/Debug Configurations.</p>
 
         </div>
 
-    </div><a class="u-url" href="/2017/05/24/Markdownsource.html" hidden></a>
+    </div><a class="u-url" href="/jekyll/run/debug/2019/12/31/working-with-run-debug.html" hidden></a>
 
 </article>
 		</div>
@@ -404,11 +259,11 @@ This line is part of the same quote.</p>
     <h2>Titles:</h2>
     
     <li>
-      <a href="#sources-for-markdown">Sources for markdown</a>
+      <a href="#code-snippets">Code snippets</a>
     </li>
     
     <li>
-      <a href="#heading-one">Heading One</a>
+      <a href="#check-out-the-jekyll-docs">Check out the Jekyll docs</a>
     </li>
     
   </ul>
