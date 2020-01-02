@@ -1,6 +1,6 @@
 <aside class="left_sidebar page_sidebar">
   <ul class="all_posts post_aside">
-    <h2>Posts:</h2>
+    <h2>All Posts:</h2>
     {% for post in site.posts %}
     <li>
       <a href="{{post.url | absolute_url}}">{{post.title}}</a>
@@ -8,51 +8,52 @@
     {% endfor %}
   </ul>
 
-  <div class="post_aside post_by_tags hidden">
-    <h2>Sorted by categories</h2>
+  <div class="post_aside post_by_tags ">
+    <h2>Tags</h2>
     {% for tag in site.tags %}
-    <h3>{{ tag[0] }}</h3>
-    <ul>
+      <details>
+    <summary>{{ tag[0] }}</summary>
       {% for post in tag[1] %}
-      <li><a href="{{post.url | absolute_url}}">{{ post.title }}</a></li>
+      <a href="{{post.url | absolute_url}}">{{ post.title }}</a>
       {% endfor %}
-    </ul>
-    {% endfor %}
-  </div>
+    </details>
+      {% endfor %}
+    </div>
 
-  <div class="post_aside post_by_dates hidden">
+  <div class="post_aside post_by_categories ">
     <h2>Categories</h2>
     {% for category in site.categories %}
-    <h3>{{ category[0] }}</h3>
-    <ul>
+      <details>
+    <summary>{{ category[0] }}</summary>
       {% for post in category[1] %}
-      <li><a href="{{post.url | absolute_url}}">{{ post.title }}</a></li>
+      <a href="{{post.url | absolute_url}}">{{ post.title }}</a>
       {% endfor %}
-    </ul>
+    </details>
     {% endfor %}
   </div>
-  
-  <div class="post_aside ">
+  <div class="post_aside post_by_dates">
     {%- if site.posts.size != 0 -%}
     {% assign posts = site.posts %}
     {% assign. last_post = posts | last %}
     {% assign. first_post = posts | first %}
-    {% assign top_year = last_post.date | truncate: 4, '' %}
-    {% assign bottom_year = first_post.date | truncate: 4, '' %}
-    <h3>{{top_year}}, {{bottom_year}}</h3>
+    {% assign bottom_year = last_post.date | truncate: 4, '' %}
+    {% assign top_year = first_post.date | truncate: 4, '' %}
     <h2 class="post-list-heading">Posts list</h2>
-    <ul class="post-list">
-      {%- for post in site.posts -%}
-      <li>
-        <!-- <span class="post-meta">{{ post.date | date_to_string: date_format }}</span> -->
-        <h3>
-          <a class="post-link" href="{{post.url | absolute_url}}">
-            {{ post.title | escape }}
-          </a>
-        </h3>
-      </li>
-      {%- endfor -%}
-    </ul>
+    <div class="post-list">
+      {% for year in (bottom_year..top_year) %}
+      <details>
+        <summary class="post-meta">{{ year }}</summary>
+        {%- for post in site.posts -%}
+        {% assign post_year = post.date | truncate: 4, '' | plus: 0 }} %}
+        {%- if post_year == year -%}
+        <a class="post-link" href="{{post.url | absolute_url}}">
+          {{ post.title | escape }}
+        </a>
+        {%- endif -%}
+        {%- endfor -%}
+      </details>
+      {% endfor %}
+    </div>
     {% endif %}
   </div>
 </aside>
