@@ -27,77 +27,75 @@
 <script src="http://localhost:4000/assets/tipuesearch/tipuesearch_set.js" ></script>
 <script src="http://localhost:4000/assets/tipuesearch/tipuesearch.min.js" ></script>
 </head><body><header class="top_header">
-    <a href="http://localhost:4000" class="logo">Logo</a>
-    <form class="top_search" action="/">
-      <div class="tipue_search_left"><img src="/assets/tipuesearch/search.png"
-          class="tipue_search_icon"></div>
-      <div class="tipue_search_right"><input type="text" name="q" id="tipue_search_input" pattern=".{3,}"
-          title="At least 3 characters" required></div>
-      <div style="clear: both;"></div>
-    </form>
-</header>
-<main class="page-content" aria-label="Content">
+  <a href="http://localhost:4000" class="logo">Logo</a>
+  <form class="top_search">
+    <div class="tipue_search_left">
+      <div class="tipue_search_close hidden">✕</div>
+      <img src="/assets/tipuesearch/search.png" class="tipue_search_icon">
+    </div>
+    <div class="tipue_search_right ">
+      <input type="text" name="q" id="tipue_search_input" class="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required>
+    </div>
+    <div style="clear: both;"></div>
+  </form>
+</header><main class="page-content" aria-label="Content">
 		<aside class="left_sidebar page_sidebar">
-  <ul class="all_posts post_aside">
+  <div class="filters">
+    <span class="choice active all" data-type="all">All</span>
+    <span class="choice tags" data-type="tags">Tags</span>
+    <span class="choice categories" data-type="categories">Categories</span>
+    <span class="choice years" data-type="years">Years</span>
+  </div>
+  <div class="post_aside post_all pal ">
     <h2>All Posts:</h2>
     
-    <li>
       <a href="http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug.html">Work with run/debug configurations</a>
-    </li>
     
-    <li>
       <a href="http://localhost:4000/jekyll/update/2019/12/30/welcome-to-jekyll.html">Welcome to Jekyll!</a>
-    </li>
     
-    <li>
       <a href="http://localhost:4000/2018/01/12/readme.html">Readme</a>
-    </li>
     
-    <li>
       <a href="http://localhost:4000/2017/05/24/Markdownsource.html">Markdownsource</a>
-    </li>
     
-    <li>
       <a href="http://localhost:4000/2017/05/24/Markdown-here.html">Markdown Here</a>
-    </li>
     
-  </ul>
+  </div>
 
-  <div class="post_aside post_by_tags ">
+  <div class="post_aside post_tags pal hidden">
     <h2>Tags</h2>
     
-      <details>
-    <summary>markdown</summary>
+    <details>
+      <summary>markdown</summary>
       
       <a href="http://localhost:4000/2017/05/24/Markdownsource.html">Markdownsource</a>
       
       <a href="http://localhost:4000/2017/05/24/Markdown-here.html">Markdown Here</a>
       
     </details>
-      
-      <details>
-    <summary>opera</summary>
-      
-      <a href="http://localhost:4000/2017/05/24/Markdown-here.html">Markdown Here</a>
-      
-    </details>
-      
-      <details>
-    <summary>github</summary>
+    
+    <details>
+      <summary>opera</summary>
       
       <a href="http://localhost:4000/2017/05/24/Markdown-here.html">Markdown Here</a>
       
     </details>
+    
+    <details>
+      <summary>github</summary>
       
-      <details>
-    <summary>source</summary>
+      <a href="http://localhost:4000/2017/05/24/Markdown-here.html">Markdown Here</a>
+      
+    </details>
+    
+    <details>
+      <summary>source</summary>
       
       <a href="http://localhost:4000/2017/05/24/Markdownsource.html">Markdownsource</a>
       
     </details>
-      
-      <details>
-    <summary>jekyll</summary>
+    
+    <details>
+      <summary>jekyll</summary>
       
       <a href="http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug.html">Work with run/debug configurations</a>
       
@@ -106,23 +104,23 @@
       <a href="http://localhost:4000/2018/01/12/readme.html">Readme</a>
       
     </details>
-      
-      <details>
-    <summary>code</summary>
+    
+    <details>
+      <summary>code</summary>
       
       <a href="http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug.html">Work with run/debug configurations</a>
       
       <a href="http://localhost:4000/jekyll/update/2019/12/30/welcome-to-jekyll.html">Welcome to Jekyll!</a>
       
     </details>
-      
-    </div>
+    
+  </div>
 
-  <div class="post_aside post_by_categories ">
+  <div class="post_aside post_categories pal hidden">
     <h2>Categories</h2>
     
-      <details>
-    <summary>jekyll</summary>
+    <details>
+      <summary>jekyll</summary>
       
       <a href="http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug.html">Work with run/debug configurations</a>
       
@@ -130,29 +128,29 @@
       
     </details>
     
-      <details>
-    <summary>update</summary>
+    <details>
+      <summary>update</summary>
       
       <a href="http://localhost:4000/jekyll/update/2019/12/30/welcome-to-jekyll.html">Welcome to Jekyll!</a>
       
     </details>
     
-      <details>
-    <summary>run</summary>
+    <details>
+      <summary>run</summary>
       
       <a href="http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug.html">Work with run/debug configurations</a>
       
     </details>
     
-      <details>
-    <summary>debug</summary>
+    <details>
+      <summary>debug</summary>
       
       <a href="http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug.html">Work with run/debug configurations</a>
       
     </details>
     
   </div>
-  <div class="post_aside post_by_dates">
+  <div class="post_aside post_years pal hidden">
     
     
     
@@ -195,52 +193,52 @@
   <div class="latest_posts">
     <h2>Latest posts</h2>
     <ul class="post-list"><li>
-        <span class="post-meta">31 Dec 2019</span>
         <h3>
           <a class="post-link" href="http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug.html">
             Work with run/debug configurations
           </a>
         </h3>
+        <span class="post-meta">31 Dec 2019</span>
         
         <p>To run or debug your code in PyCharm, you can use numerous run/debug configurations. Each run/debug configuration represents a named set of run/debug startup properties. When you perform run, debug, or test operations with PyCharm, you always start a process based on one of the existing configurations using its parameters.</p>
         
       </li><li>
-        <span class="post-meta">30 Dec 2019</span>
         <h3>
           <a class="post-link" href="http://localhost:4000/jekyll/update/2019/12/30/welcome-to-jekyll.html">
             Welcome to Jekyll!
           </a>
         </h3>
+        <span class="post-meta">30 Dec 2019</span>
         
         <p>You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.</p>
         
       </li><li>
-        <span class="post-meta">12 Jan 2018</span>
         <h3>
           <a class="post-link" href="http://localhost:4000/2018/01/12/readme.html">
             Readme
           </a>
         </h3>
+        <span class="post-meta">12 Jan 2018</span>
         
         <p>Create a Jekyll generated Static Site according to the following design specification. Provide me the Jekyll code and I will take care of creating and hosting it on my GitHub Pages repository.</p>
         
       </li><li>
-        <span class="post-meta">24 May 2017</span>
         <h3>
           <a class="post-link" href="http://localhost:4000/2017/05/24/Markdownsource.html">
             Markdownsource
           </a>
         </h3>
+        <span class="post-meta">24 May 2017</span>
         
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae felis vitae leo ornare auctor. Aenean nec magna elementum, euismod lectus et, commodo magna. Nunc eget urna in nisl tempor rutrum a in augue.</p>
         
       </li><li>
-        <span class="post-meta">24 May 2017</span>
         <h3>
           <a class="post-link" href="http://localhost:4000/2017/05/24/Markdown-here.html">
             Markdown Here
           </a>
         </h3>
+        <span class="post-meta">24 May 2017</span>
         
         <p>Markdown Here is a Google Chrome, Firefox, Safari, Opera, and Thunderbird extension that lets you write email<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).</p>
         
@@ -274,5 +272,6 @@
       $('#tipue_search_input').tipuesearch();
     });
   </script>
+  <script src="http://localhost:4000/js/main.js"></script>
   <!-- --></body>
 </html>

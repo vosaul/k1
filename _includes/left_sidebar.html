@@ -1,37 +1,41 @@
 <aside class="left_sidebar page_sidebar">
-  <ul class="all_posts post_aside">
+  <div class="filters">
+    <span class="choice active all" data-type="all">All</span>
+    <span class="choice tags" data-type="tags">Tags</span>
+    <span class="choice categories" data-type="categories">Categories</span>
+    <span class="choice years" data-type="years">Years</span>
+  </div>
+  <div class="post_aside post_all pal ">
     <h2>All Posts:</h2>
     {% for post in site.posts %}
-    <li>
       <a href="{{post.url | absolute_url}}">{{post.title}}</a>
-    </li>
     {% endfor %}
-  </ul>
+  </div>
 
-  <div class="post_aside post_by_tags ">
+  <div class="post_aside post_tags pal hidden">
     <h2>Tags</h2>
     {% for tag in site.tags %}
-      <details>
-    <summary>{{ tag[0] }}</summary>
+    <details>
+      <summary>{{ tag[0] }}</summary>
       {% for post in tag[1] %}
       <a href="{{post.url | absolute_url}}">{{ post.title }}</a>
       {% endfor %}
     </details>
-      {% endfor %}
-    </div>
+    {% endfor %}
+  </div>
 
-  <div class="post_aside post_by_categories ">
+  <div class="post_aside post_categories pal hidden">
     <h2>Categories</h2>
     {% for category in site.categories %}
-      <details>
-    <summary>{{ category[0] }}</summary>
+    <details>
+      <summary>{{ category[0] }}</summary>
       {% for post in category[1] %}
       <a href="{{post.url | absolute_url}}">{{ post.title }}</a>
       {% endfor %}
     </details>
     {% endfor %}
   </div>
-  <div class="post_aside post_by_dates">
+  <div class="post_aside post_years pal hidden">
     {%- if site.posts.size != 0 -%}
     {% assign posts = site.posts %}
     {% assign. last_post = posts | last %}
