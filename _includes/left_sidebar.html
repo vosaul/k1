@@ -4,14 +4,14 @@
     <span class="hidden"> &#30;</span>
     <div>Site navigation</div>
   </div>
-  <div class="filters">
+  <div class="filters hide_small">
     <h2>Filters:</h2>
     <span class="choice active all" data-type="all">All</span>
     <span class="choice tags" data-type="tags">Tags</span>
     <span class="choice categories" data-type="categories">Categories</span>
     <span class="choice years" data-type="years">Years</span>
   </div>
-  <div class="post_aside post_all pal ">
+  <div class="post_aside post_all pal hide_small">
     <h2>All Posts:</h2>
     {% for post in site.posts %}
       <a href="{{post.url | absolute_url}}"

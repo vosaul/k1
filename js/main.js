@@ -9,6 +9,13 @@ $(document).ready(function() {
     $(target).show();
   });
 
+  $(".post_toggler").click(function() {
+    $(".post_toggler span").toggle();
+    $(".filters").toggle();
+    $(".post_all").toggle();
+    $(".oal").hide();
+  });
+
   $(".page_toggler").click(function() {
     $(".page_toggler span").toggle();
     $(".page_nav").toggle();

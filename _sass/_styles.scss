@@ -129,6 +129,9 @@ body {
   }
   summary {
     padding: 8px 10px;
+    &:hover {
+      background: #ddd;
+    }
   }
   .choice {
     display: block;
@@ -231,9 +234,6 @@ footer {
   background: #eee;
 }
 @media screen and (max-width: 999px) {
-  .hide_large {
-    display: block;
-  }
   .hide_small {
     display: none;
   }
@@ -243,6 +243,56 @@ footer {
     display: grid;
     display: -ms-grid;
     grid-template-columns: 1fr;
+  }
+.top_header {
+  grid-template-columns: 100px 1fr;
+  .top_search .tipue_search_icon {
+    width: 30px;
+}
+.tipue_search_right {
+  width: 80%;
+}
+}
+.page_sidebar .post_aside h2 {
+    margin: 40px 0 0;
+    padding: 0;
+}
+  .left_sidebar {
+    .post_toggler {
+      display: flex;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      position: fixed;
+      top: 75px;
+      left: 20px;
+      padding: 5px;
+      text-align: center;
+      z-index: 1000;
+      cursor: pointer;
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      -ms-border-radius: 8px;
+      -o-border-radius: 8px;
+      * {
+        font-size: 16px;
+        font-weight: normal;
+        padding: 3px;
+      }
+    }
+    .filters {
+      position: fixed;
+      top: 120px;
+      left: 0;
+      background: #fff;
+    }
+    .pal {
+      position: fixed;
+      top: 80px;
+      left: 130px;
+      background: #fff;
+      width: 100%;
+    }
   }
 
   .right_sidebar {
@@ -267,7 +317,7 @@ footer {
         font-weight: normal;
         padding: 3px;
       }
-}
+    }
     .page_nav {
       position: fixed;
       top: 90px;
@@ -276,11 +326,18 @@ footer {
     }
   }
 }
+
 @media screen and (min-width: 1000px) {
-  .hide_small {
-    display: block;
-  }
   .hide_large {
     display: none;
+  }
+}
+@media screen and (max-width: 425px) {
+  .top_header {
+    grid-template-columns: 1fr;;
+    .top_search {
+      margin: 10px auto;
+      width: 90%;
+    }
   }
 }

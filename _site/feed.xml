@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-04T23:38:01+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Spectral Interface</title><link href="http://localhost:4000/2020/01/03/spectral-interface.html" rel="alternate" type="text/html" title="Spectral Interface" /><published>2020-01-03T00:00:00+02:00</published><updated>2020-01-03T00:00:00+02:00</updated><id>http://localhost:4000/2020/01/03/spectral-interface</id><content type="html" xml:base="http://localhost:4000/2020/01/03/spectral-interface.html">&lt;p&gt;SpIN requires a working installation of Python and TensorFlow. We recommend
+running it on GPU for faster convergence.&lt;/p&gt;
+
+&lt;h2 id=&quot;spectral-inference-networks-spin&quot;&gt;Spectral Inference Networks (SpIN)&lt;/h2&gt;
+
+&lt;p&gt;This package provides an implementation of Spectral Inference Networks,
+as in &lt;a href=&quot;https://arxiv.org/abs/1806.02215&quot;&gt;Pfau, Petersen, Agarwal, Barrett and Stachenfeld (2018)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This is not an officially supported Google product.&lt;/p&gt;
+
+&lt;h2 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h2&gt;
+&lt;p&gt;SpIN requires a working installation of Python and TensorFlow. We recommend
+running it on GPU for faster convergence.&lt;/p&gt;
+
+&lt;p&gt;If you want to make use of the GUI (on by default) you will also need Tcl/Tk
+installed on your system.&lt;/p&gt;
+
+&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;After cloning the repo, run pip to install the package and its Python
+dependencies:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;spectral_inference_networks
+pip &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
+&lt;p&gt;Training a spectral inference network is similar to most other deep learning
+pipelines: you must construct a data source, network architecture and optimizer.
+What makes spectral inference networks unique is that instead of a loss you
+provide a linear operator to diagonalize. The code expects an object of the
+LinearOperator class, which can be constructed from a similarity kernel or by
+other means. LinearOperator objects can be added together or multiplied by a
+scalar.&lt;/p&gt;
+
+&lt;p&gt;Below is a minimal example of training spectral inference networks:&lt;/p&gt;
+
+&lt;p&gt;```python
+import tensorflow as tf
+import spectral_inference_networks as spin&lt;/p&gt;
+
+&lt;p&gt;batch_size = 1024
+input_dim = 10
+num_eigenvalues = 5
+iterations = 1000  # number of training iterations&lt;/p&gt;
+
+&lt;h2 id=&quot;create-variables-for-simple-mlp&quot;&gt;Create variables for simple MLP&lt;/h2&gt;
+&lt;p&gt;w1 = tf.Variable(tf.random.normal([input_dim, 64]))
+w2 = tf.Variable(tf.random.normal([64, num_eigenvalues]))&lt;/p&gt;
+
+&lt;p&gt;b1 = tf.Variable(tf.random.normal([64]))
+b2 = tf.Variable(tf.random.normal([num_eigenvalues]))&lt;/p&gt;
+
+&lt;h2 id=&quot;create-function-to-construct-simple-mlp&quot;&gt;Create function to construct simple MLP&lt;/h2&gt;
+&lt;p&gt;def network(x):
+  h1 = tf.nn.relu(tf.matmul(x, w1) + b1)
+  return tf.matmul(h1, w2) + b2&lt;/p&gt;
+
+&lt;p&gt;data = tf.random.normal([batch_size, input_dim])  # replace with actual data&lt;/p&gt;
+&lt;h2 id=&quot;squared-exponential-kernel&quot;&gt;Squared exponential kernel.&lt;/h2&gt;
+&lt;p&gt;kernel = lambda x, y: tf.exp(-(tf.norm(x-y, axis=1, keepdims=True)**2))
+linop = spin.KernelOperator(kernel)
+optim = tf.train.AdamOptimizer()&lt;/p&gt;
+
+&lt;h2 id=&quot;constructs-the-internal-training-ops-for-spectral-inference-networks&quot;&gt;Constructs the internal training ops for spectral inference networks.&lt;/h2&gt;
+&lt;p&gt;spectral_net = spin.SpectralNetwork(
+    linop,
+    network,
+    data,
+    [w1, w2, b1, b2])&lt;/p&gt;
+
+&lt;h2 id=&quot;trivial-defaults-for-logging-and-stats-hooks&quot;&gt;Trivial defaults for logging and stats hooks.&lt;/h2&gt;
+&lt;p&gt;logging_config = {
+    ‘config’: {},
+    ‘log_image_every’: iterations,
+    ‘save_params_every’: iterations,
+    ‘saver_path’: ‘/tmp’,
+    ‘saver_name’: ‘example’,
+}&lt;/p&gt;
+
+&lt;p&gt;stats_hooks = {
+    ‘create’: spin.util.create_default_stats,
+    ‘update’: spin.util.update_default_stats,
+}&lt;/p&gt;
+
+&lt;h2 id=&quot;executes-the-training-of-spectral-inference-networks&quot;&gt;Executes the training of spectral inference networks.&lt;/h2&gt;
+&lt;p&gt;stats = spectral_net.train(
+    optim,
+    iterations,
+    logging_config,
+    stats_hooks)&lt;/p&gt;</content><author><name></name></author><category term="spectral" /><category term="python" /><category term="network" /><summary type="html">SpIN requires a working installation of Python and TensorFlow. We recommend running it on GPU for faster convergence.</summary></entry><entry><title type="html">Work with run/debug configurations</title><link href="http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug.html" rel="alternate" type="text/html" title="Work with run/debug configurations" /><published>2019-12-31T08:40:50+02:00</published><updated>2019-12-31T08:40:50+02:00</updated><id>http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug</id><content type="html" xml:base="http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug.html">&lt;p&gt;To run or debug your code in PyCharm, you can use numerous run/debug configurations. Each run/debug configuration represents a named set of run/debug startup properties. When you perform run, debug, or test operations with PyCharm, you always start a process based on one of the existing configurations using its parameters.&lt;/p&gt;
+
+&lt;p&gt;PyCharm comes with a number of run/debug configuration types for the various running, debugging and testing issues. You can create your own run/debug configurations of specific types.&lt;/p&gt;
+
+&lt;h2 id=&quot;code-snippets&quot;&gt;Code snippets&lt;/h2&gt;
+
+&lt;p&gt;Each run/debug configuration type has its own default settings. Whenever a new run/debug configuration of the respective type is created, it is based on these default settings.&lt;/p&gt;
+
+&lt;p&gt;Temporary run/debug configurations﻿
+A temporary run/debug configuration is automatically created every time you choose Run &lt;item_name&gt; or Debug &lt;item_name&gt; for an item without a permanent configuration.&lt;/item_name&gt;&lt;/item_name&gt;&lt;/p&gt;
+
+&lt;p&gt;Temporary Run/Debug configurations are recorded in the &lt;project directory=&quot;&quot;&gt;/.idea/workspace.xml file under the Run Manager section.&lt;/project&gt;&lt;/p&gt;
+
+&lt;p&gt;Save a temporary configuration as permanent﻿
+Select the temporary configuration in the Run/Debug Configurations Dialog and click the Save button on the toolbar.&lt;/p&gt;
+
+&lt;p&gt;Alternatively, select the temporary configuration in the run/debug configuration selector and then click Save &lt;configuration name=&quot;&quot;&gt; Configuration.&lt;/configuration&gt;&lt;/p&gt;
+
+&lt;p&gt;Once you save a temporary configuration it becomes permanent and it is recorded in a separate XML file in the &lt;project directory=&quot;&quot;&gt;/.idea/ directory. For example, MyProject/.idea/Car.xml.&lt;/project&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;check-out-the-jekyll-docs&quot;&gt;Check out the Jekyll docs&lt;/h2&gt;
+
+&lt;p&gt;Temporary configurations are marked with semi-transparent icons and are managed the same way as the permanent configurations.&lt;/p&gt;
+
+&lt;p&gt;By default, five temporary run/debug configurations are allowed per project, so when you create the sixth configuration, the one created first is removed, and so on. To change this limit, use the Temporary configurations limit field in the Templates page of the Run/Debug Configurations Dialog.&lt;/p&gt;
+
+&lt;p&gt;Permanent run/debug configurations﻿
+A permanent run/debug configuration is explicitly created for a particular class or method. If there is no permanent configuration for an item, PyCharm automatically creates a temporary configuration for it, when you choose Run &lt;item_name&gt; or Debug &lt;item_name&gt; from the context menu of this class or method.&lt;/item_name&gt;&lt;/item_name&gt;&lt;/p&gt;
+
+&lt;p&gt;Run/debug configuration templates﻿
+The templates with default run/debug configuration settings are listed in the Run/Debug Configurations dialog under the Templates node. They denote the settings that are used when new run/debug configurations are created.&lt;/p&gt;
+
+&lt;p&gt;Do not set up a working directory for the default Run/Debug Configurations listed under the Templates node. This may lead to unresolved targets in newly created Run/Debug Configurations.&lt;/p&gt;
+
+&lt;p&gt;You can set the default settings for a specific configuration type that will become applicable to any run/debug configuration of this type created later. Changing defaults does not affect the existing run/debug configurations.&lt;/p&gt;
+
+&lt;p&gt;The process of editing per-type default configuration settings is described in Change Templates of Run/Debug Configurations. The process of creating or editing custom run/debug configurations is described in Create and Edit Run/Debug Configurations.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="code" /><summary type="html">To run or debug your code in PyCharm, you can use numerous run/debug configurations. Each run/debug configuration represents a named set of run/debug startup properties. When you perform run, debug, or test operations with PyCharm, you always start a process based on one of the existing configurations using its parameters.</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2019/12/30/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2019-12-30T08:40:50+02:00</published><updated>2019-12-30T08:40:50+02:00</updated><id>http://localhost:4000/jekyll/update/2019/12/30/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2019/12/30/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;Jekyll requires blog post files to be named according to the following format:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;YEAR-MONTH-DAY-title.MARKUP&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Where &lt;code class=&quot;highlighter-rouge&quot;&gt;YEAR&lt;/code&gt; is a four-digit number, &lt;code class=&quot;highlighter-rouge&quot;&gt;MONTH&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;DAY&lt;/code&gt; are both two-digit numbers, and &lt;code class=&quot;highlighter-rouge&quot;&gt;MARKUP&lt;/code&gt; is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;h2 id=&quot;code-snippets&quot;&gt;Code snippets&lt;/h2&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;check-out-the-jekyll-docs&quot;&gt;Check out the Jekyll docs&lt;/h2&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;after-that&quot;&gt;After that&lt;/h3&gt;
+
+&lt;p&gt;After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="code" /><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry><entry><title type="html">Readme</title><link href="http://localhost:4000/2018/01/12/readme.html" rel="alternate" type="text/html" title="Readme" /><published>2018-01-12T00:00:00+02:00</published><updated>2018-01-12T00:00:00+02:00</updated><id>http://localhost:4000/2018/01/12/readme</id><content type="html" xml:base="http://localhost:4000/2018/01/12/readme.html">&lt;h2 id=&quot;request&quot;&gt;Request:&lt;/h2&gt;
+
+&lt;p&gt;Create a Jekyll generated Static Site according to the following design specification. Provide me the Jekyll code and I will take care of creating and hosting it on my GitHub Pages repository.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-i-want-to-achieve&quot;&gt;What I want to achieve:&lt;/h3&gt;
+
+&lt;p&gt;This is a site primarily for writing content such as software instructions or lecture notes. I would like to easily sort content (posts) by category or date. Content should be written in markdown and I only want to store content in the “_posts” folder (no pages such as “About Me” are needed).&lt;/p&gt;
+
+&lt;p&gt;It is important to use &lt;strong&gt;as little code as possible&lt;/strong&gt; to achieve this design. I do not want this implemented as a Jekyll theme laid upon a highly flexible site structure. Preferably no theme at all. I don’t want unused code or folders related to comments section, social media, etc… The config file, in particular, should be simple.&lt;/p&gt;
+
+&lt;h2 id=&quot;design&quot;&gt;Design:&lt;/h2&gt;
+&lt;p&gt;The design should match &lt;a href=&quot;https://www.jetbrains.com/help/pycharm&quot;&gt;this site&lt;/a&gt; by Jetbrains as closely as possible. Layout should react the same way as this site does to a pc screen or smarthphone, especially the left menu. Same formatting of links.&lt;/p&gt;
+
+&lt;h3 id=&quot;sections-that-are-needed&quot;&gt;Sections that are needed:&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;A top bar with webpage title&lt;/li&gt;
+  &lt;li&gt;A search box also shown in the top bar&lt;/li&gt;
+  &lt;li&gt;A left menu showing post titles sorted by category or date. See below for further information (Left menu functionality is NB).&lt;/li&gt;
+  &lt;li&gt;The main section showing content&lt;/li&gt;
+  &lt;li&gt;Footer with “MIT License” and “This Page is generated with GitHubPages”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I need the following &lt;strong&gt;markdown features&lt;/strong&gt; to be processed similar to the above site and/or GitHub itself (GFM):&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Headers, lists, bold, italics (obviously)&lt;/li&gt;
+  &lt;li&gt;Blockquotes. Preferably with dark grey bar on the left and on light grey background such as &lt;a href=&quot;https://www.markdownguide.org/basic-syntax/&quot;&gt;here&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Inline Code on light grey background&lt;/li&gt;
+  &lt;li&gt;Code blocks on very dark grey background&lt;/li&gt;
+  &lt;li&gt;If possible: Python syntax highlighting supported by GFM and also shown &lt;a href=&quot;https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet&quot;&gt;here&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;advanced-features-of-this-site-which-are-not-needed&quot;&gt;Advanced features of this site which are not needed:&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;The right column showing Header titles of the current page.&lt;/li&gt;
+  &lt;li&gt;When using a smartphone, the left menu shows the header titles of current page under the term “On this page”&lt;/li&gt;
+  &lt;li&gt;Previous post and Next Post&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;parameters&quot;&gt;Parameters&lt;/h3&gt;
+&lt;p&gt;Parameters should be kept in the main jekyll config file:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Title&lt;/li&gt;
+  &lt;li&gt;Website address, if not using the default ‘___.github.io/”&lt;/li&gt;
+  &lt;li&gt;Default post to display as home page (I will not use a unique home page)&lt;/li&gt;
+  &lt;li&gt;I would like to define the colours of the top bar and the Website title in the top bar via the config file.&lt;/li&gt;
+  &lt;li&gt;Priority posts (see below)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;the-left-menu-nb&quot;&gt;The Left Menu (NB)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;At the top should be written “Arrange by: Category or Date”, where one can click on Category or Date. The text for “Category” and “Date” should have their own CSS colour so they can be highlighted.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;If arranging by Category: Each category is listed alphabetically in the left menu. Each post title is listed within each category, sorted by date.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A post can be shown in multiple categories if it is labelled with multiple categories.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If arranging by Date, each Year of posting is listed from highest to lowest. Each post title is listed within each year when it was posted, and sorted by date.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Clicking on a Category or Year should only expand or collapse this section in the menu, it should have no associated link. Only posts can be clicked.&lt;/li&gt;
+  &lt;li&gt;Hovering over a Category, Year or Post Title should highlight the box grey.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The currently displayed post should be in Bold&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Below “Arrange by: Category or Date” should be a list of post titles which are defined in the config file (priority posts). It should come before the list of categories or years. These post titles should be in line on the left with the list of categories. Separated from “Arrange by:…” and the “categories/years” by a horizontal line above and below.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><summary type="html">Request:</summary></entry><entry><title type="html">Markdown Here</title><link href="http://localhost:4000/2017/05/24/Markdown-here.html" rel="alternate" type="text/html" title="Markdown Here" /><published>2017-05-24T00:00:00+03:00</published><updated>2017-05-24T00:00:00+03:00</updated><id>http://localhost:4000/2017/05/24/Markdown-here</id><content type="html" xml:base="http://localhost:4000/2017/05/24/Markdown-here.html">&lt;p&gt;&lt;a href=&quot;http://markdown-here.com&quot;&gt;&lt;strong&gt;Visit the website.&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa&quot;&gt;&lt;strong&gt;Get it for Chrome.&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://addons.mozilla.org/en-US/firefox/addon/markdown-here/&quot;&gt;&lt;strong&gt;Get it for Firefox.&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://s3.amazonaws.com/markdown-here/markdown-here.safariextz&quot;&gt;&lt;strong&gt;Get it for Safari.&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://addons.mozilla.org/en-US/thunderbird/addon/markdown-here/&quot;&gt;&lt;strong&gt;Get it for Thunderbird and Postbox.&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://addons.opera.com/en/extensions/details/markdown-here/&quot;&gt;&lt;strong&gt;Get it for Opera.&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://groups.google.com/forum/?fromgroups#!forum/markdown-here/&quot;&gt;&lt;strong&gt;Discuss it and ask questions in the Google Group.&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Markdown Here&lt;/em&gt; is a Google Chrome, Firefox, Safari, Opera, and Thunderbird extension that lets you write email&lt;sup&gt;†&lt;/sup&gt; in Markdown&lt;sup&gt;‡&lt;/sup&gt; and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).&lt;/p&gt;
+
+&lt;p&gt;Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.&lt;/p&gt;
+
+&lt;p&gt;To discover what can be done with Markdown in &lt;em&gt;Markdown Here&lt;/em&gt;, check out the &lt;a href=&quot;https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet&quot;&gt;Markdown Here Cheatsheet&lt;/a&gt; and the other &lt;a href=&quot;https://github.com/adam-p/markdown-here/wiki&quot;&gt;wiki pages&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;sup&gt;†: And Google Groups posts, and Blogger posts, and Evernote notes, and Wordpress posts! &lt;a href=&quot;#compatibility&quot;&gt;See more&lt;/a&gt;.&lt;/sup&gt;&lt;br /&gt;
+&lt;sup&gt;‡: And TeX mathematical formulae!&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-image1.gimp.png&quot; alt=&quot;screenshot of conversion&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;#installation-instructions&quot;&gt;Installation Instructions&lt;/a&gt;&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;&lt;a href=&quot;#usage-instructions&quot;&gt;Usage Instructions&lt;/a&gt;&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;&lt;a href=&quot;#troubleshooting&quot;&gt;Troubleshooting&lt;/a&gt;&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;&lt;a href=&quot;#compatibility&quot;&gt;Compatibility&lt;/a&gt;&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;&lt;a href=&quot;#notes-and-miscellaneous&quot;&gt;Notes and Miscellaneous&lt;/a&gt;&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;&lt;a href=&quot;#building-the-extension-bundles&quot;&gt;Building the Extension Bundles&lt;/a&gt;&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;&lt;a href=&quot;#next-steps&quot;&gt;Next Steps, Credits, Feedback, License&lt;/a&gt;&lt;/strong&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;installation-instructions&quot;&gt;Installation Instructions&lt;/h2&gt;
+
+&lt;h3 id=&quot;chrome&quot;&gt;Chrome&lt;/h3&gt;
+
+&lt;h4 id=&quot;chrome-web-store&quot;&gt;Chrome Web Store&lt;/h4&gt;
+
+&lt;p&gt;Go to the &lt;a href=&quot;https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa&quot;&gt;Chrome Web Store page for &lt;em&gt;Markdown Here&lt;/em&gt;&lt;/a&gt; and install normally.&lt;/p&gt;
+
+&lt;p&gt;After installing, make sure to reload your webmail or restart Chrome!&lt;/p&gt;
+
+&lt;h4 id=&quot;manualdevelopment&quot;&gt;Manual/Development&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Clone this repo.&lt;/li&gt;
+  &lt;li&gt;In Chrome, open the Extensions settings. (Wrench button, Tools, Extensions.)&lt;/li&gt;
+  &lt;li&gt;On the Extensions settings page, click the “Developer Mode” checkbox.&lt;/li&gt;
+  &lt;li&gt;Click the now-visible “Load unpacked extension…” button. Navigate to the directory where you cloned the repo, then the &lt;code class=&quot;highlighter-rouge&quot;&gt;src&lt;/code&gt; directory under that.&lt;/li&gt;
+  &lt;li&gt;The &lt;em&gt;Markdown Here&lt;/em&gt; extension should now be visible in your extensions list.&lt;/li&gt;
+  &lt;li&gt;Reload your webmail page (and maybe application) before trying to convert an email.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;firefox-and-thunderbird&quot;&gt;Firefox and Thunderbird&lt;/h3&gt;
+
+&lt;h4 id=&quot;mozilla-add-ons-site&quot;&gt;Mozilla Add-ons site&lt;/h4&gt;
+
+&lt;p&gt;Go to the &lt;a href=&quot;https://addons.mozilla.org/en-US/firefox/addon/markdown-here/&quot;&gt;Firefox Add-ons page for &lt;em&gt;Markdown Here&lt;/em&gt;&lt;/a&gt; and install normally.&lt;/p&gt;
+
+&lt;p&gt;Or go to the “Tools &amp;gt; Add-ons” menu and then search for “Markdown Here”.&lt;/p&gt;
+
+&lt;p&gt;After installing, make sure to restart Firefox/Thunderbird!&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; It takes up to a month for Mozilla to approve changes to the Firefox/Thunderbird extension, so updates (features, fixes) will lag behind what is shown here. You can manually choose to install the newest version before it’s reviewed from the list of versions: &lt;a href=&quot;https://addons.mozilla.org/en-US/firefox/addon/markdown-here/versions/&quot;&gt;https://addons.mozilla.org/en-US/firefox/addon/markdown-here/versions/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;manualdevelopment-1&quot;&gt;Manual/Development&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Clone this repo.&lt;/li&gt;
+  &lt;li&gt;Follow the instructions in the MDN &lt;a href=&quot;https://developer.mozilla.org/en/Setting_up_extension_development_environment&quot;&gt;“Setting up an extension development environment”&lt;/a&gt; article.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;safari&quot;&gt;Safari&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://s3.amazonaws.com/markdown-here/markdown-here.safariextz&quot;&gt;Download the extension directly.&lt;/a&gt; When it has finished downloading, double click it to install.&lt;/p&gt;
+
+&lt;h4 id=&quot;preferences&quot;&gt;Preferences&lt;/h4&gt;
+
+&lt;p&gt;To get to the Markdown Here preferences, open the Safari preferences and then go to the “Extensions” tab. Then click the “Click me to show Markdown Here options” box.&lt;/p&gt;
+
+&lt;h3 id=&quot;opera&quot;&gt;Opera&lt;/h3&gt;
+
+&lt;p&gt;Note that &lt;em&gt;Markdown Here&lt;/em&gt; only works with Opera versions 16 and higher (i.e., the ones that are based on Chromium).&lt;/p&gt;
+
+&lt;p&gt;Go to the &lt;a href=&quot;https://addons.opera.com/en/extensions/details/markdown-here/&quot;&gt;Opera Add-ons store page for &lt;em&gt;Markdown Here&lt;/em&gt;&lt;/a&gt; and install normally.&lt;/p&gt;
+
+&lt;p&gt;After installing, make sure to reload your webmail or restart Chrome!&lt;/p&gt;
+
+&lt;h2 id=&quot;usage-instructions&quot;&gt;Usage Instructions&lt;/h2&gt;
+
+&lt;p&gt;Install it, and then…&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;In Chrome/Safari/Opera, &lt;em&gt;make sure&lt;/em&gt; you reload your web mail page before trying to use Markdown Here.&lt;/li&gt;
+  &lt;li&gt;In Chrome/Firefox/Safari/Opera, log into your Gmail, Hotmail, or Yahoo account and start a new email. In Thunderbird, start a new message.&lt;/li&gt;
+  &lt;li&gt;Make sure you’re using the rich editor.
+    &lt;ul&gt;
+      &lt;li&gt;In Gmail, click the “Rich formatting” link, if it’s visible.&lt;/li&gt;
+      &lt;li&gt;In Thunderbird, make sure “Compose messages in HTML format” is enabled in your “Account Settings”, “Composition &amp;amp; Addressing” pane.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Compose an email in Markdown. For example:&lt;/p&gt;
+
+    &lt;pre&gt;
+**Hello** `world`.
+
+```javascript
+alert('Hello syntax highlighting.');
+```
+&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Right-click in the compose box and choose the “Markdown Toggle” item from the context menu. Or click the button that appears in your address bar. Or use the hotkey (&lt;kbd&gt;CTRL&lt;/kbd&gt;+&lt;kbd&gt;ALT&lt;/kbd&gt;+&lt;kbd&gt;M&lt;/kbd&gt; by default).&lt;/li&gt;
+  &lt;li&gt;You should see your email rendered correctly from Markdown into rich HTML.&lt;/li&gt;
+  &lt;li&gt;Send your awesome email to everyone you know. It will appear to them the same way it looks to you.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;revert-to-markdown&quot;&gt;Revert to Markdown&lt;/h3&gt;
+
+&lt;p&gt;After rendering your Markdown to pretty HTML, you can still get back to your original Markdown. Just right-click anywhere in the newly rendered Markdown and click “Markdown Toggle” – your email compose body will change back to the Markdown you had written.&lt;/p&gt;
+
+&lt;p&gt;Note that any changes you make to the pretty HTML will be lost when you revert to Markdown.&lt;/p&gt;
+
+&lt;p&gt;In Gmail, you can also use the browser’s Undo command (&lt;kbd&gt;CTRL&lt;/kbd&gt;+&lt;kbd&gt;Z&lt;/kbd&gt; / &lt;kbd&gt;CMD&lt;/kbd&gt;+&lt;kbd&gt;Z&lt;/kbd&gt;, or from the Edit menu). Be warned that you might also lose the last few characters you entered.&lt;/p&gt;
+
+&lt;h3 id=&quot;replies&quot;&gt;Replies&lt;/h3&gt;
+
+&lt;p&gt;In Gmail, Thunderbird, and Google Groups, you can use “Markdown Toggle” normally: just write your reply (top, bottom, inline, wherever) and then convert. The original email that you’re replying to will be left alone. (Technically: Existing &lt;code class=&quot;highlighter-rouge&quot;&gt;blockquote&lt;/code&gt; blocks will be left intact.)&lt;/p&gt;
+
+&lt;p&gt;In Hotmail and Yahoo (which don’t put the original in a &lt;code class=&quot;highlighter-rouge&quot;&gt;blockquote&lt;/code&gt;), and optionally in Gmail, Thunderbird, and Google Groups, you can ensure that only the part of the reply that you wrote gets converted by selecting what you want to convert and then clicking “Markdown Toggle” – see the next section.&lt;/p&gt;
+
+&lt;h3 id=&quot;selectionpiecemeal-conversion&quot;&gt;Selection/Piecemeal Conversion&lt;/h3&gt;
+
+&lt;p&gt;Sometimes you don’t want to convert the entire email; sometimes your email isn’t entirely Markdown. To convert only part of the email, select the text (with your mouse or keyboard), right-click on it, and click the “Markdown Toggle” menu item. Your selection is magically rendered into pretty HTML.&lt;/p&gt;
+
+&lt;p&gt;To revert back to Markdown, just put your cursor anywhere in the block of converted text, right click, and click the “Markdown Toggle” menu item again. Now it’s magically back to the original Markdown.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-image2.gimp.png&quot; alt=&quot;screenshot of selection conversion&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;things-to-know-about-convertingreverting-a-selection&quot;&gt;Things to know about converting/reverting a selection&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;If you select only part of a block of text, only that text will be converted. The converted block will be wrapped in a paragraph element, so the original line will be broken up. You probably don’t want to ever do this.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;You can select and revert multiple converted blocks at the same time. One upshot of this is that you can select your entire email, click “Markdown Toggle”, and all portions of it that you had converted will be reverted.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If you don’t have anything selected when you click “Markdown Toggle”, &lt;em&gt;Markdown Here&lt;/em&gt; will check if there are converted blocks anywhere in the message and revert them. If there no converted blocks are found, it will convert the entire email.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;options&quot;&gt;Options&lt;/h3&gt;
+
+&lt;p&gt;The &lt;em&gt;Markdown Here&lt;/em&gt; Options page can be accessed via the Chrome, Firefox, Safari, or Thunderbird extensions list. The available options include:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Styling modifications for the rendered Markdown.&lt;/li&gt;
+  &lt;li&gt;Syntax highlighting theme selection and modification.&lt;/li&gt;
+  &lt;li&gt;TeX math formulae processing enabling and customization.&lt;/li&gt;
+  &lt;li&gt;What the hotkey should be.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For Chrome and Firefox, any changes made in the &lt;em&gt;Markdown Here&lt;/em&gt; Options are automatically synchronized between your other installations of that browser (if you have the sync feature enabled in the browser).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/adam-p/markdown-here/master/store-assets/markdown-here-chrome-options-1.gimp.png&quot; alt=&quot;screenshot of options&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;troubleshooting&quot;&gt;Troubleshooting&lt;/h2&gt;
+
+&lt;p&gt;See the &lt;a href=&quot;https://github.com/adam-p/markdown-here/wiki/Troubleshooting&quot;&gt;Troubleshooting wiki page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;compatibility&quot;&gt;Compatibility&lt;/h2&gt;
+
+&lt;p&gt;See the &lt;a href=&quot;https://github.com/adam-p/markdown-here/wiki/Compatibility&quot;&gt;Compatibility wiki page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;notes-and-miscellaneous&quot;&gt;Notes and Miscellaneous&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Markdown Here&lt;/em&gt; uses &lt;a href=&quot;http://github.github.com/github-flavored-markdown/&quot;&gt;Github Flavored Markdown&lt;/a&gt;, with the limitation that GFM special links are not supported (&lt;a href=&quot;https://github.com/adam-p/markdown-here/issues/11&quot;&gt;issue #11&lt;/a&gt;); nor will they be, as MDH is not Github-specific.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Available languages for syntax highlighting (and the way they should be written in the fenced code block) can be seen on the &lt;a href=&quot;http://softwaremaniacs.org/media/soft/highlight/test.html&quot;&gt;highlight.js demo page&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Images embedded inline in your Markdown will be retained when you “Markdown Toggle”. Gmail allows you to put images inline in your email – this can be much easier than referencing an external image.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Email signatures are automatically excluded from conversion. Specifically, anything after the semi-standard &lt;code class=&quot;highlighter-rouge&quot;&gt;'-- '&lt;/code&gt; (note the trailing space) is left alone.
+    &lt;ul&gt;
+      &lt;li&gt;Note that Hotmail and Yahoo do &lt;em&gt;not&lt;/em&gt; automatically add the &lt;code class=&quot;highlighter-rouge&quot;&gt;'-- '&lt;/code&gt; to signatures, so you have to add it yourself.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The “Markdown Toggle” menu item shows up for more element types than it can correctly render. This is intended to help people realize that they’re not using a rich editor. Otherwise they just don’t see the menu item and don’t know why.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Styling:
+    &lt;ul&gt;
+      &lt;li&gt;The use of browser-specific styles (-moz-, -webkit-) should be avoided. If used, they may not render correctly for people reading the email in a different browser from the one where the email was sent.&lt;/li&gt;
+      &lt;li&gt;The use of state-dependent styles (like &lt;code class=&quot;highlighter-rouge&quot;&gt;a:hover&lt;/code&gt;) don’t work because they don’t match at the time the styles are made explicit. (In email, styles must be explicitly applied to all elements – stylesheets get stripped.)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;For more tweaky features, visit the &lt;a href=&quot;https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks&quot;&gt;Tips and Tricks&lt;/a&gt; section.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;building-the-extension-bundles&quot;&gt;Building the Extension Bundles&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd utils
+node build.js
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;chrome-and-opera-extension&quot;&gt;Chrome and Opera extension&lt;/h3&gt;
+
+&lt;p&gt;Create a file with a &lt;code class=&quot;highlighter-rouge&quot;&gt;.zip&lt;/code&gt; extension containing these files and directories:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;manifest.json
+common/
+chrome/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;firefoxthunderbird-extension&quot;&gt;Firefox/Thunderbird extension&lt;/h3&gt;
+
+&lt;p&gt;Create a file with a &lt;code class=&quot;highlighter-rouge&quot;&gt;.xpi&lt;/code&gt; extension containing these files and directories:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;chrome.manifest
+install.rdf
+common/
+firefox/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;safari-extension&quot;&gt;Safari extension&lt;/h3&gt;
+
+&lt;p&gt;The browser-specific code is located in the &lt;a href=&quot;https://github.com/adam-p/markdown-here-safari&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;markdown-here-safari&lt;/code&gt;&lt;/a&gt; project.&lt;/p&gt;
+
+&lt;p&gt;Use the Safari Extension Builder.&lt;/p&gt;
+
+&lt;h2 id=&quot;next-steps&quot;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;See the &lt;a href=&quot;https://github.com/adam-p/markdown-here/issues&quot;&gt;issues list&lt;/a&gt; and the &lt;a href=&quot;https://github.com/adam-p/markdown-here/wiki/Development-Notes&quot;&gt;Notes Wiki&lt;/a&gt;. All ideas, bugs, plans, complaints, and dreams will end up in one of those two places.&lt;/p&gt;
+
+&lt;p&gt;Feel free to create a feature request issue if what you want isn’t already there. If you’d prefer a less formal approach to floating an idea, post to the &lt;a href=&quot;https://groups.google.com/forum/?fromgroups=#!forum/markdown-here&quot;&gt;“markdown-here” Google Group&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;It also takes a fair bit of work to stay up-to-date with the latest changes in all the applications and web sites where Markdown Here works.&lt;/p&gt;
+
+&lt;h2 id=&quot;credits&quot;&gt;Credits&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;Markdown Here&lt;/em&gt; was coded on the shoulders of giants.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Markdown-to-HTML: &lt;a href=&quot;https://github.com/chjj/marked&quot;&gt;chjj / marked&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Syntax highlighting: &lt;a href=&quot;https://github.com/isagalaev/highlight.js&quot;&gt;isagalaev / highlight.js&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;HTML-to-text: &lt;a href=&quot;https://github.com/mtrimpe/jsHtmlToText&quot;&gt;mtrimpe / jsHtmlToText&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;feedback&quot;&gt;Feedback&lt;/h2&gt;
+
+&lt;p&gt;All bugs, feature requests, pull requests, feedback, etc., are welcome. &lt;a href=&quot;https://github.com/adam-p/markdown-here/issues&quot;&gt;Create an issue&lt;/a&gt;. Or &lt;a href=&quot;https://groups.google.com/forum/?fromgroups=#!forum/markdown-here&quot;&gt;post to the “markdown-here” Google Group&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;license&quot;&gt;License&lt;/h2&gt;
+
+&lt;h3 id=&quot;code&quot;&gt;Code&lt;/h3&gt;
+
+&lt;p&gt;MIT License: http://adampritchard.mit-license.org/ or see &lt;a href=&quot;https://github.com/adam-p/markdown-here/blob/master/LICENSE&quot;&gt;the &lt;code class=&quot;highlighter-rouge&quot;&gt;LICENSE&lt;/code&gt; file&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;logo&quot;&gt;Logo&lt;/h3&gt;
+
+&lt;p&gt;Copyright 2015, &lt;a href=&quot;http://protractor.ninja/&quot;&gt;Austin Anderson&lt;/a&gt;. Licensed to Markdown Here under the &lt;a href=&quot;https://github.com/adam-p/markdown-here/blob/master/CLA-individual.md&quot;&gt;MDH contributor license agreement&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;other-images&quot;&gt;Other images&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://creativecommons.org/licenses/by/3.0/&quot;&gt;Creative Commons Attribution 3.0 Unported (CC BY 3.0) License&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.github.com/adam-p/markdown-here/master/store-assets/dos-equis-MDH.jpg&quot; alt=&quot;Dos Equis man says&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="markdown" /><category term="opera" /><category term="github" /><summary type="html">Visit the website. Get it for Chrome. Get it for Firefox. Get it for Safari. Get it for Thunderbird and Postbox. Get it for Opera. Discuss it and ask questions in the Google Group.</summary></entry><entry><title type="html">Markdownsource</title><link href="http://localhost:4000/2017/05/24/Markdownsource.html" rel="alternate" type="text/html" title="Markdownsource" /><published>2017-05-24T00:00:00+03:00</published><updated>2017-05-24T00:00:00+03:00</updated><id>http://localhost:4000/2017/05/24/Markdownsource</id><content type="html" xml:base="http://localhost:4000/2017/05/24/Markdownsource.html">&lt;h1 id=&quot;sources-for-markdown&quot;&gt;Sources for markdown&lt;/h1&gt;
+
+&lt;p&gt;https://www.markdownguide.org/cheat-sheet/&lt;/p&gt;
+
+&lt;p&gt;http://sangsoonam.github.io/2019/01/20/syntax-highlighting-in-jekyll.html&lt;/p&gt;
+
+&lt;p&gt;Style inspiration for the site layout:&lt;/p&gt;
+
+&lt;p&gt;https://www.jetbrains.com/help/pycharm/quick-start-guide.html&lt;/p&gt;
+
+&lt;h1 id=&quot;heading-one&quot;&gt;Heading One&lt;/h1&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae felis vitae leo ornare auctor. Aenean nec magna elementum, euismod lectus et, commodo magna. Nunc eget urna in nisl tempor rutrum a in augue.&lt;/p&gt;
+
+&lt;p&gt;Integer eu aliquet turpis. Sed ipsum diam, fermentum non leo et, imperdiet faucibus enim. Aenean fringilla ornare tortor porta auctor. Maecenas placerat purus vitae mi pulvinar, eu ornare purus gravida.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-two&quot;&gt;Heading Two&lt;/h2&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae felis vitae leo ornare auctor. Aenean nec magna elementum, euismod lectus et, commodo magna. Nunc eget urna in nisl tempor rutrum a in augue.&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-three&quot;&gt;Heading Three&lt;/h3&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae felis vitae leo ornare auctor. Aenean nec magna elementum, euismod lectus et, commodo magna. Nunc eget urna in nisl tempor rutrum a in augue.&lt;/p&gt;
+
+&lt;h4 id=&quot;heading-four&quot;&gt;Heading Four&lt;/h4&gt;
+&lt;h5 id=&quot;heading-five&quot;&gt;Heading Five&lt;/h5&gt;
+&lt;h6 id=&quot;heading-six&quot;&gt;Heading Six&lt;/h6&gt;
+
+&lt;p&gt;Unordered list&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;This is a list 1&lt;/li&gt;
+  &lt;li&gt;This is a &lt;strong&gt;list&lt;/strong&gt; 2, with some &lt;strong&gt;bold&lt;/strong&gt; and some &lt;em&gt;italics&lt;/em&gt;. And some &lt;strong&gt;&lt;em&gt;bold and italics&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;This is a list 3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ordered list&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;First item&lt;/li&gt;
+  &lt;li&gt;Second item&lt;/li&gt;
+  &lt;li&gt;Third item&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Indented list&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;First item&lt;/li&gt;
+  &lt;li&gt;Second item&lt;/li&gt;
+  &lt;li&gt;Third item
+    &lt;ul&gt;
+      &lt;li&gt;Indented item&lt;/li&gt;
+      &lt;li&gt;Indented item&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Fourth item&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;underline&quot;&gt;Underline&lt;/h3&gt;
+
+&lt;p&gt;Does it work?&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Yes it does.&lt;/p&gt;
+
+&lt;h3 id=&quot;blockquotes&quot;&gt;Blockquotes&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Blockquotes are very handy
+This line is part of the same quote.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Quote break.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This is a very long line that will still be quoted properly when it wraps. Oh boy let’s keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can &lt;em&gt;put&lt;/em&gt; &lt;strong&gt;Markdown&lt;/strong&gt; into a blockquote.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The workspace synchronization will sync all your files, folders and settings automatically. This will allow you to fetch your workspace on any other device.
+    &lt;blockquote&gt;
+      &lt;p&gt;This is a blockquoteTo start syncing your workspace, just sign in with Google in the menu.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Blockquotes can be nested&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Dorothy followed her through many of the beautiful rooms in her castle.&lt;/p&gt;
+
+  &lt;blockquote&gt;
+    &lt;p&gt;The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;code-with-syntax-highlighting&quot;&gt;Code with syntax highlighting&lt;/h3&gt;
+
+&lt;p&gt;This is a test of &lt;code class=&quot;highlighter-rouge&quot;&gt;some inline code&lt;/code&gt; and whether it formats &lt;code class=&quot;highlighter-rouge&quot;&gt;correctly&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;And now for blocks of code:&lt;/p&gt;
+
+&lt;p&gt;Ruby code&lt;/p&gt;
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Python code&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello World&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;a docstring&quot;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;tables&quot;&gt;Tables&lt;/h3&gt;
+
+&lt;p&gt;SmartyPants converts ASCII punctuation characters into “smart” typographic punctuation HTML entities. For example:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;ASCII&lt;/th&gt;
+      &lt;th&gt;HTML&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Single backticks&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;'Isn't this fun?'&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;‘Isn’t this fun?’&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Quotes&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Isn't this fun?&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;“Isn’t this fun?”&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Dashes&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-- is en-dash, --- is em-dash&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;– is en-dash, — is em-dash&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Try again:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Markdown&lt;/th&gt;
+      &lt;th&gt;Less&lt;/th&gt;
+      &lt;th&gt;Pretty&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;em&gt;Still&lt;/em&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;renders&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;nicely&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;What&lt;/td&gt;
+      &lt;td&gt;is&lt;/td&gt;
+      &lt;td&gt;up&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;What&lt;/td&gt;
+      &lt;td&gt;is&lt;/td&gt;
+      &lt;td&gt;up&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><author><name></name></author><category term="markdown" /><category term="source" /><summary type="html">Sources for markdown</summary></entry></feed>
