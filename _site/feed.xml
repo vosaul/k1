@@ -1,4 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-04T12:55:09+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Spectral Interface</title><link href="http://localhost:4000/2020/01/03/spectral-interface.html" rel="alternate" type="text/html" title="Spectral Interface" /><published>2020-01-03T00:00:00+02:00</published><updated>2020-01-03T00:00:00+02:00</updated><id>http://localhost:4000/2020/01/03/spectral-interface</id><content type="html" xml:base="http://localhost:4000/2020/01/03/spectral-interface.html">&lt;h2 id=&quot;spectral-inference-networks-spin&quot;&gt;Spectral Inference Networks (SpIN)&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-04T18:14:57+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Spectral Interface</title><link href="http://localhost:4000/2020/01/03/spectral-interface.html" rel="alternate" type="text/html" title="Spectral Interface" /><published>2020-01-03T00:00:00+02:00</published><updated>2020-01-03T00:00:00+02:00</updated><id>http://localhost:4000/2020/01/03/spectral-interface</id><content type="html" xml:base="http://localhost:4000/2020/01/03/spectral-interface.html">&lt;p&gt;SpIN requires a working installation of Python and TensorFlow. We recommend
+running it on GPU for faster convergence.&lt;/p&gt;
+
+&lt;h2 id=&quot;spectral-inference-networks-spin&quot;&gt;Spectral Inference Networks (SpIN)&lt;/h2&gt;
 
 &lt;p&gt;This package provides an implementation of Spectral Inference Networks,
 as in &lt;a href=&quot;https://arxiv.org/abs/1806.02215&quot;&gt;Pfau, Petersen, Agarwal, Barrett and Stachenfeld (2018)&lt;/a&gt;.&lt;/p&gt;
@@ -84,9 +87,11 @@ optim = tf.train.AdamOptimizer()&lt;/p&gt;
     optim,
     iterations,
     logging_config,
-    stats_hooks)&lt;/p&gt;</content><author><name></name></author><category term="spectral" /><category term="python" /><category term="network" /><summary type="html">Spectral Inference Networks (SpIN)</summary></entry><entry><title type="html">Work with run/debug configurations</title><link href="http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug.html" rel="alternate" type="text/html" title="Work with run/debug configurations" /><published>2019-12-31T08:40:50+02:00</published><updated>2019-12-31T08:40:50+02:00</updated><id>http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug</id><content type="html" xml:base="http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug.html">&lt;p&gt;To run or debug your code in PyCharm, you can use numerous run/debug configurations. Each run/debug configuration represents a named set of run/debug startup properties. When you perform run, debug, or test operations with PyCharm, you always start a process based on one of the existing configurations using its parameters.&lt;/p&gt;
+    stats_hooks)&lt;/p&gt;</content><author><name></name></author><category term="spectral" /><category term="python" /><category term="network" /><summary type="html">SpIN requires a working installation of Python and TensorFlow. We recommend running it on GPU for faster convergence.</summary></entry><entry><title type="html">Work with run/debug configurations</title><link href="http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug.html" rel="alternate" type="text/html" title="Work with run/debug configurations" /><published>2019-12-31T08:40:50+02:00</published><updated>2019-12-31T08:40:50+02:00</updated><id>http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug</id><content type="html" xml:base="http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug.html">&lt;p&gt;To run or debug your code in PyCharm, you can use numerous run/debug configurations. Each run/debug configuration represents a named set of run/debug startup properties. When you perform run, debug, or test operations with PyCharm, you always start a process based on one of the existing configurations using its parameters.&lt;/p&gt;
 
 &lt;p&gt;PyCharm comes with a number of run/debug configuration types for the various running, debugging and testing issues. You can create your own run/debug configurations of specific types.&lt;/p&gt;
+
+&lt;h2 id=&quot;code-snippets&quot;&gt;Code snippets&lt;/h2&gt;
 
 &lt;p&gt;Each run/debug configuration type has its own default settings. Whenever a new run/debug configuration of the respective type is created, it is based on these default settings.&lt;/p&gt;
 
@@ -101,6 +106,8 @@ Select the temporary configuration in the Run/Debug Configurations Dialog and cl
 &lt;p&gt;Alternatively, select the temporary configuration in the run/debug configuration selector and then click Save &lt;configuration name=&quot;&quot;&gt; Configuration.&lt;/configuration&gt;&lt;/p&gt;
 
 &lt;p&gt;Once you save a temporary configuration it becomes permanent and it is recorded in a separate XML file in the &lt;project directory=&quot;&quot;&gt;/.idea/ directory. For example, MyProject/.idea/Car.xml.&lt;/project&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;check-out-the-jekyll-docs&quot;&gt;Check out the Jekyll docs&lt;/h2&gt;
 
 &lt;p&gt;Temporary configurations are marked with semi-transparent icons and are managed the same way as the permanent configurations.&lt;/p&gt;
 
@@ -136,7 +143,11 @@ The templates with default run/debug configuration settings are listed in the Ru
 
 &lt;h2 id=&quot;check-out-the-jekyll-docs&quot;&gt;Check out the Jekyll docs&lt;/h2&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="code" /><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry><entry><title type="html">Readme</title><link href="http://localhost:4000/2018/01/12/readme.html" rel="alternate" type="text/html" title="Readme" /><published>2018-01-12T00:00:00+02:00</published><updated>2018-01-12T00:00:00+02:00</updated><id>http://localhost:4000/2018/01/12/readme</id><content type="html" xml:base="http://localhost:4000/2018/01/12/readme.html">&lt;h1 id=&quot;request&quot;&gt;Request:&lt;/h1&gt;
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;after-that&quot;&gt;After that&lt;/h3&gt;
+
+&lt;p&gt;After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="code" /><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry><entry><title type="html">Readme</title><link href="http://localhost:4000/2018/01/12/readme.html" rel="alternate" type="text/html" title="Readme" /><published>2018-01-12T00:00:00+02:00</published><updated>2018-01-12T00:00:00+02:00</updated><id>http://localhost:4000/2018/01/12/readme</id><content type="html" xml:base="http://localhost:4000/2018/01/12/readme.html">&lt;h2 id=&quot;request&quot;&gt;Request:&lt;/h2&gt;
 
 &lt;p&gt;Create a Jekyll generated Static Site according to the following design specification. Provide me the Jekyll code and I will take care of creating and hosting it on my GitHub Pages repository.&lt;/p&gt;
 
@@ -146,7 +157,7 @@ The templates with default run/debug configuration settings are listed in the Ru
 
 &lt;p&gt;It is important to use &lt;strong&gt;as little code as possible&lt;/strong&gt; to achieve this design. I do not want this implemented as a Jekyll theme laid upon a highly flexible site structure. Preferably no theme at all. I don’t want unused code or folders related to comments section, social media, etc… The config file, in particular, should be simple.&lt;/p&gt;
 
-&lt;h1 id=&quot;design&quot;&gt;Design:&lt;/h1&gt;
+&lt;h2 id=&quot;design&quot;&gt;Design:&lt;/h2&gt;
 &lt;p&gt;The design should match &lt;a href=&quot;https://www.jetbrains.com/help/pycharm&quot;&gt;this site&lt;/a&gt; by Jetbrains as closely as possible. Layout should react the same way as this site does to a pc screen or smarthphone, especially the left menu. Same formatting of links.&lt;/p&gt;
 
 &lt;h3 id=&quot;sections-that-are-needed&quot;&gt;Sections that are needed:&lt;/h3&gt;
@@ -167,7 +178,7 @@ The templates with default run/debug configuration settings are listed in the Ru
   &lt;li&gt;If possible: Python syntax highlighting supported by GFM and also shown &lt;a href=&quot;https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet&quot;&gt;here&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;advanced-features-of-this-site-which-are-not-needed&quot;&gt;Advanced features of this site which are not needed:&lt;/h3&gt;
+&lt;h2 id=&quot;advanced-features-of-this-site-which-are-not-needed&quot;&gt;Advanced features of this site which are not needed:&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;The right column showing Header titles of the current page.&lt;/li&gt;
   &lt;li&gt;When using a smartphone, the left menu shows the header titles of current page under the term “On this page”&lt;/li&gt;
@@ -184,7 +195,7 @@ The templates with default run/debug configuration settings are listed in the Ru
   &lt;li&gt;Priority posts (see below)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;the-left-menu-nb&quot;&gt;The Left Menu (NB)&lt;/h1&gt;
+&lt;h2 id=&quot;the-left-menu-nb&quot;&gt;The Left Menu (NB)&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;At the top should be written “Arrange by: Category or Date”, where one can click on Category or Date. The text for “Category” and “Date” should have their own CSS colour so they can be highlighted.&lt;/p&gt;
@@ -487,7 +498,6 @@ firefox/
 
 &lt;p&gt;Integer eu aliquet turpis. Sed ipsum diam, fermentum non leo et, imperdiet faucibus enim. Aenean fringilla ornare tortor porta auctor. Maecenas placerat purus vitae mi pulvinar, eu ornare purus gravida.&lt;/p&gt;
 
-&lt;h1 id=&quot;heading-one-1&quot;&gt;Heading One&lt;/h1&gt;
 &lt;h2 id=&quot;heading-two&quot;&gt;Heading Two&lt;/h2&gt;
 &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae felis vitae leo ornare auctor. Aenean nec magna elementum, euismod lectus et, commodo magna. Nunc eget urna in nisl tempor rutrum a in augue.&lt;/p&gt;
 

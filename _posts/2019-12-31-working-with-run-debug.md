@@ -3,6 +3,7 @@ layout: post
 title:  "Work with run/debug configurations"
 description: To run or debug your code in PyCharm, you can use numerous run/debug configurations. Each run/debug configuration represents a named set of run/debug startup properties. When you perform run, debug, or test operations with PyCharm, you always start a process based on one of the existing configurations using its parameters.
 titles:
+- Work with run/debug configurations
 - Code snippets
 - Check out the Jekyll docs
 date:   2019-12-31 08:40:50 +0200
@@ -17,6 +18,8 @@ To run or debug your code in PyCharm, you can use numerous run/debug configurati
 
 PyCharm comes with a number of run/debug configuration types for the various running, debugging and testing issues. You can create your own run/debug configurations of specific types.
 
+## Code snippets
+
 Each run/debug configuration type has its own default settings. Whenever a new run/debug configuration of the respective type is created, it is based on these default settings.
 
 Temporary run/debug configurations﻿
@@ -27,9 +30,12 @@ Temporary Run/Debug configurations are recorded in the <project directory>/.idea
 Save a temporary configuration as permanent﻿
 Select the temporary configuration in the Run/Debug Configurations Dialog and click the Save button on the toolbar.
 
+
 Alternatively, select the temporary configuration in the run/debug configuration selector and then click Save <configuration name> Configuration.
 
 Once you save a temporary configuration it becomes permanent and it is recorded in a separate XML file in the <project directory>/.idea/ directory. For example, MyProject/.idea/Car.xml.
+
+## Check out the Jekyll docs
 
 Temporary configurations are marked with semi-transparent icons and are managed the same way as the permanent configurations.
 

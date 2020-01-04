@@ -2,8 +2,14 @@
 layout: post
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae felis vitae leo ornare auctor. Aenean nec magna elementum, euismod lectus et, commodo magna. Nunc eget urna in nisl tempor rutrum a in augue.
 titles:
-- Sources for markdown
 - Heading One
+- Heading Two
+- Heading Three
+- Heading Four
+- Underline
+- Blockquotes
+- Code with syntax highlighting
+- Tables
 tags: [markdown, source]
 tipue_search_active: true
 exclude_from_search: false
@@ -23,7 +29,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae felis vit
 
 Integer eu aliquet turpis. Sed ipsum diam, fermentum non leo et, imperdiet faucibus enim. Aenean fringilla ornare tortor porta auctor. Maecenas placerat purus vitae mi pulvinar, eu ornare purus gravida.
 
-# Heading One
 ## Heading Two
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae felis vitae leo ornare auctor. Aenean nec magna elementum, euismod lectus et, commodo magna. Nunc eget urna in nisl tempor rutrum a in augue.
 

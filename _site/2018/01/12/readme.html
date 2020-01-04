@@ -4,6 +4,7 @@
   <meta name="googlebot" content="noindex">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="Cache-control" content="public">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <title></title>
   <meta name="keys" content="">
@@ -40,7 +41,13 @@
   </form>
 </header><main class="page-content" aria-label="Content">
 		<aside class="left_sidebar page_sidebar">
+  <div class="hide_large post_toggler" id="left_toggler">
+    <span> &#31;</span>
+    <span class="hidden"> &#30;</span>
+    <div>Site navigation</div>
+  </div>
   <div class="filters">
+    <h2>Filters:</h2>
     <span class="choice active all" data-type="all">All</span>
     <span class="choice tags" data-type="tags">Tags</span>
     <span class="choice categories" data-type="categories">Categories</span>
@@ -238,7 +245,7 @@
         </div>
 
         <div class="post-content e-content" itemprop="articleBody">
-            <h1 id="request">Request:</h1>
+            <h2 id="request">Request:</h2>
 
 <p>Create a Jekyll generated Static Site according to the following design specification. Provide me the Jekyll code and I will take care of creating and hosting it on my GitHub Pages repository.</p>
 
@@ -248,7 +255,7 @@
 
 <p>It is important to use <strong>as little code as possible</strong> to achieve this design. I do not want this implemented as a Jekyll theme laid upon a highly flexible site structure. Preferably no theme at all. I don’t want unused code or folders related to comments section, social media, etc… The config file, in particular, should be simple.</p>
 
-<h1 id="design">Design:</h1>
+<h2 id="design">Design:</h2>
 <p>The design should match <a href="https://www.jetbrains.com/help/pycharm">this site</a> by Jetbrains as closely as possible. Layout should react the same way as this site does to a pc screen or smarthphone, especially the left menu. Same formatting of links.</p>
 
 <h3 id="sections-that-are-needed">Sections that are needed:</h3>
@@ -269,7 +276,7 @@
   <li>If possible: Python syntax highlighting supported by GFM and also shown <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">here</a></li>
 </ul>
 
-<h3 id="advanced-features-of-this-site-which-are-not-needed">Advanced features of this site which are not needed:</h3>
+<h2 id="advanced-features-of-this-site-which-are-not-needed">Advanced features of this site which are not needed:</h2>
 <ul>
   <li>The right column showing Header titles of the current page.</li>
   <li>When using a smartphone, the left menu shows the header titles of current page under the term “On this page”</li>
@@ -286,7 +293,7 @@
   <li>Priority posts (see below)</li>
 </ul>
 
-<h1 id="the-left-menu-nb">The Left Menu (NB)</h1>
+<h2 id="the-left-menu-nb">The Left Menu (NB)</h2>
 <ul>
   <li>
     <p>At the top should be written “Arrange by: Category or Date”, where one can click on Category or Date. The text for “Category” and “Date” should have their own CSS colour so they can be highlighted.</p>
@@ -314,7 +321,12 @@
 		</div>
 		<aside class="page_sidebar right_sidebar">
   
-  <div class="page_nav post_aside" id="page_nav">
+  <div class="hide_large page_toggler" id="right_toggler">
+    <span> &#31;</span>
+    <span class="hidden"> &#30;</span>
+    <div>Page navigation</div>
+  </div>
+  <div class="page_nav post_aside hide_small" id="page_nav">
     <h2>Titles:</h2>
     
       <a href="#request" class="in_link">Request</a>
@@ -324,6 +336,8 @@
       <a href="#design" class="in_link">Design</a>
     
       <a href="#advanced-features-of-this-site-which-are-not-needed" class="in_link">Advanced features of this site which are not needed</a>
+    
+      <a href="#the-left-menu-nb" class="in_link">The Left Menu (NB)</a>
     
   </div>
   

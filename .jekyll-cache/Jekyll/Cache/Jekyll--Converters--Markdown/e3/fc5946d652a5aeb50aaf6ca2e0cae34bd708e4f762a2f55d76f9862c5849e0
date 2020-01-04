@@ -1,4 +1,7 @@
-I"ˆ<h2 id="spectral-inference-networks-spin">Spectral Inference Networks (SpIN)</h2>
+I"<p>SpIN requires a working installation of Python and TensorFlow. We recommend
+running it on GPU for faster convergence.</p>
+
+<h2 id="spectral-inference-networks-spin">Spectral Inference Networks (SpIN)</h2>
 
 <p>This package provides an implementation of Spectral Inference Networks,
 as in <a href="https://arxiv.org/abs/1806.02215">Pfau, Petersen, Agarwal, Barrett and Stachenfeld (2018)</a>.</p>

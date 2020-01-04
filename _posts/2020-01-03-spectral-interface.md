@@ -4,7 +4,6 @@ titles:
 - Spectral Inference Networks (SpIN)
 - Prerequisites
 - Installation
-- Installation
 - Usage
 - Create variables for simple MLP
 - Create function to construct simple MLP
@@ -13,6 +12,9 @@ titles:
 tags: [spectral, python, network]
 type: important
 ---
+SpIN requires a working installation of Python and TensorFlow. We recommend
+running it on GPU for faster convergence.
+
 ## Spectral Inference Networks (SpIN)
 
 This package provides an implementation of Spectral Inference Networks,

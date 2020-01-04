@@ -4,6 +4,7 @@
   <meta name="googlebot" content="noindex">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="Cache-control" content="public">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <title></title>
   <meta name="keys" content="">
@@ -40,7 +41,13 @@
   </form>
 </header><main class="page-content" aria-label="Content">
 		<aside class="left_sidebar page_sidebar">
+  <div class="hide_large post_toggler" id="left_toggler">
+    <span> &#31;</span>
+    <span class="hidden"> &#30;</span>
+    <div>Site navigation</div>
+  </div>
   <div class="filters">
+    <h2>Filters:</h2>
     <span class="choice active all" data-type="all">All</span>
     <span class="choice tags" data-type="tags">Tags</span>
     <span class="choice categories" data-type="categories">Categories</span>
@@ -242,6 +249,8 @@
 
 <p>PyCharm comes with a number of run/debug configuration types for the various running, debugging and testing issues. You can create your own run/debug configurations of specific types.</p>
 
+<h2 id="code-snippets">Code snippets</h2>
+
 <p>Each run/debug configuration type has its own default settings. Whenever a new run/debug configuration of the respective type is created, it is based on these default settings.</p>
 
 <p>Temporary run/debug configurations﻿
@@ -255,6 +264,8 @@ Select the temporary configuration in the Run/Debug Configurations Dialog and cl
 <p>Alternatively, select the temporary configuration in the run/debug configuration selector and then click Save <configuration name=""> Configuration.</configuration></p>
 
 <p>Once you save a temporary configuration it becomes permanent and it is recorded in a separate XML file in the <project directory="">/.idea/ directory. For example, MyProject/.idea/Car.xml.</project></p>
+
+<h2 id="check-out-the-jekyll-docs">Check out the Jekyll docs</h2>
 
 <p>Temporary configurations are marked with semi-transparent icons and are managed the same way as the permanent configurations.</p>
 
@@ -280,8 +291,15 @@ The templates with default run/debug configuration settings are listed in the Ru
 		</div>
 		<aside class="page_sidebar right_sidebar">
   
-  <div class="page_nav post_aside" id="page_nav">
+  <div class="hide_large page_toggler" id="right_toggler">
+    <span> &#31;</span>
+    <span class="hidden"> &#30;</span>
+    <div>Page navigation</div>
+  </div>
+  <div class="page_nav post_aside hide_small" id="page_nav">
     <h2>Titles:</h2>
+    
+      <a href="#work-with-rundebug-configurations" class="in_link">Work with run/debug configurations</a>
     
       <a href="#code-snippets" class="in_link">Code snippets</a>
     
