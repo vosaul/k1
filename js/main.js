@@ -8,6 +8,11 @@ $(document).ready(function() {
     $(".pal").hide();
     $(target).show();
   });
+
+  $(".page_toggler").click(function() {
+    $(".page_toggler span").toggle();
+    $(".page_nav").toggle();
+  });
 /*
   var myElement = document.getElementById('search_box');
   if (window.addEventListener) {
