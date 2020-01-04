@@ -41,9 +41,6 @@ body {
     }
   }
 }
-.divider {
-  height: 100px;
-}
 .page-content {
   padding: 0;
   min-height: 90vh;
@@ -102,7 +99,7 @@ body {
   }
 }
 .page_sidebar {
-  margin-top: 80px;
+  margin-top: 70px;
   h2 {
     padding: 10px;
   }
@@ -168,8 +165,7 @@ body {
 .search_box {
   z-index: 100;
   top: 100px;
-  padding: 20px;
-  border-bottom: 1px solid #bbb;
+  padding: 0 30px;
   #tipue_search_content {
     margin: 10px;
     #tipue_search_results_count {
@@ -177,6 +173,12 @@ body {
       font-size: 15px;
       font-weight: 400;
       padding: 10px 0;
+    }
+    .tipue_search_result {
+      margin: 10px 0 0;
+    }
+    .tipue_search_content_title {
+      font-size: 20px;
     }
     .tipue_search_content_url {
       display: none;

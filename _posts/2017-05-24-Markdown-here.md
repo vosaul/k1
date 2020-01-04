@@ -11,7 +11,8 @@ titles:
 - Next Steps
 tipue_search_active: true
 exclude_from_search: false
-tags: [markdown, opera, github] 
+tags: [markdown, opera, github]
+type: important
 ---
 
 [**Visit the website.**](http://markdown-here.com)<br>

@@ -1,4 +1,90 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-03T23:22:59+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Work with run/debug configurations</title><link href="http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug.html" rel="alternate" type="text/html" title="Work with run/debug configurations" /><published>2019-12-31T08:40:50+02:00</published><updated>2019-12-31T08:40:50+02:00</updated><id>http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug</id><content type="html" xml:base="http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug.html">&lt;p&gt;To run or debug your code in PyCharm, you can use numerous run/debug configurations. Each run/debug configuration represents a named set of run/debug startup properties. When you perform run, debug, or test operations with PyCharm, you always start a process based on one of the existing configurations using its parameters.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-04T12:55:09+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Spectral Interface</title><link href="http://localhost:4000/2020/01/03/spectral-interface.html" rel="alternate" type="text/html" title="Spectral Interface" /><published>2020-01-03T00:00:00+02:00</published><updated>2020-01-03T00:00:00+02:00</updated><id>http://localhost:4000/2020/01/03/spectral-interface</id><content type="html" xml:base="http://localhost:4000/2020/01/03/spectral-interface.html">&lt;h2 id=&quot;spectral-inference-networks-spin&quot;&gt;Spectral Inference Networks (SpIN)&lt;/h2&gt;
+
+&lt;p&gt;This package provides an implementation of Spectral Inference Networks,
+as in &lt;a href=&quot;https://arxiv.org/abs/1806.02215&quot;&gt;Pfau, Petersen, Agarwal, Barrett and Stachenfeld (2018)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This is not an officially supported Google product.&lt;/p&gt;
+
+&lt;h2 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h2&gt;
+&lt;p&gt;SpIN requires a working installation of Python and TensorFlow. We recommend
+running it on GPU for faster convergence.&lt;/p&gt;
+
+&lt;p&gt;If you want to make use of the GUI (on by default) you will also need Tcl/Tk
+installed on your system.&lt;/p&gt;
+
+&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;After cloning the repo, run pip to install the package and its Python
+dependencies:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;spectral_inference_networks
+pip &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
+&lt;p&gt;Training a spectral inference network is similar to most other deep learning
+pipelines: you must construct a data source, network architecture and optimizer.
+What makes spectral inference networks unique is that instead of a loss you
+provide a linear operator to diagonalize. The code expects an object of the
+LinearOperator class, which can be constructed from a similarity kernel or by
+other means. LinearOperator objects can be added together or multiplied by a
+scalar.&lt;/p&gt;
+
+&lt;p&gt;Below is a minimal example of training spectral inference networks:&lt;/p&gt;
+
+&lt;p&gt;```python
+import tensorflow as tf
+import spectral_inference_networks as spin&lt;/p&gt;
+
+&lt;p&gt;batch_size = 1024
+input_dim = 10
+num_eigenvalues = 5
+iterations = 1000  # number of training iterations&lt;/p&gt;
+
+&lt;h2 id=&quot;create-variables-for-simple-mlp&quot;&gt;Create variables for simple MLP&lt;/h2&gt;
+&lt;p&gt;w1 = tf.Variable(tf.random.normal([input_dim, 64]))
+w2 = tf.Variable(tf.random.normal([64, num_eigenvalues]))&lt;/p&gt;
+
+&lt;p&gt;b1 = tf.Variable(tf.random.normal([64]))
+b2 = tf.Variable(tf.random.normal([num_eigenvalues]))&lt;/p&gt;
+
+&lt;h2 id=&quot;create-function-to-construct-simple-mlp&quot;&gt;Create function to construct simple MLP&lt;/h2&gt;
+&lt;p&gt;def network(x):
+  h1 = tf.nn.relu(tf.matmul(x, w1) + b1)
+  return tf.matmul(h1, w2) + b2&lt;/p&gt;
+
+&lt;p&gt;data = tf.random.normal([batch_size, input_dim])  # replace with actual data&lt;/p&gt;
+&lt;h2 id=&quot;squared-exponential-kernel&quot;&gt;Squared exponential kernel.&lt;/h2&gt;
+&lt;p&gt;kernel = lambda x, y: tf.exp(-(tf.norm(x-y, axis=1, keepdims=True)**2))
+linop = spin.KernelOperator(kernel)
+optim = tf.train.AdamOptimizer()&lt;/p&gt;
+
+&lt;h2 id=&quot;constructs-the-internal-training-ops-for-spectral-inference-networks&quot;&gt;Constructs the internal training ops for spectral inference networks.&lt;/h2&gt;
+&lt;p&gt;spectral_net = spin.SpectralNetwork(
+    linop,
+    network,
+    data,
+    [w1, w2, b1, b2])&lt;/p&gt;
+
+&lt;h2 id=&quot;trivial-defaults-for-logging-and-stats-hooks&quot;&gt;Trivial defaults for logging and stats hooks.&lt;/h2&gt;
+&lt;p&gt;logging_config = {
+    ‘config’: {},
+    ‘log_image_every’: iterations,
+    ‘save_params_every’: iterations,
+    ‘saver_path’: ‘/tmp’,
+    ‘saver_name’: ‘example’,
+}&lt;/p&gt;
+
+&lt;p&gt;stats_hooks = {
+    ‘create’: spin.util.create_default_stats,
+    ‘update’: spin.util.update_default_stats,
+}&lt;/p&gt;
+
+&lt;h2 id=&quot;executes-the-training-of-spectral-inference-networks&quot;&gt;Executes the training of spectral inference networks.&lt;/h2&gt;
+&lt;p&gt;stats = spectral_net.train(
+    optim,
+    iterations,
+    logging_config,
+    stats_hooks)&lt;/p&gt;</content><author><name></name></author><category term="spectral" /><category term="python" /><category term="network" /><summary type="html">Spectral Inference Networks (SpIN)</summary></entry><entry><title type="html">Work with run/debug configurations</title><link href="http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug.html" rel="alternate" type="text/html" title="Work with run/debug configurations" /><published>2019-12-31T08:40:50+02:00</published><updated>2019-12-31T08:40:50+02:00</updated><id>http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug</id><content type="html" xml:base="http://localhost:4000/jekyll/run/debug/2019/12/31/working-with-run-debug.html">&lt;p&gt;To run or debug your code in PyCharm, you can use numerous run/debug configurations. Each run/debug configuration represents a named set of run/debug startup properties. When you perform run, debug, or test operations with PyCharm, you always start a process based on one of the existing configurations using its parameters.&lt;/p&gt;
 
 &lt;p&gt;PyCharm comes with a number of run/debug configuration types for the various running, debugging and testing issues. You can create your own run/debug configurations of specific types.&lt;/p&gt;
 

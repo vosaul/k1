@@ -1,6 +1,6 @@
 <aside class="page_sidebar right_sidebar">
   {% if page.titles %}
-  <div id="page_nav post_aside">
+  <div class="page_nav post_aside" id="page_nav">
     <h2>Titles:</h2>
     {% for item in page.titles %}
       <a href="#{{item | split: ' ' | join: '-' | downcase | remove: '/'}}" class="in_link">{{item}}</a>

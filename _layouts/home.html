@@ -6,16 +6,16 @@ languages: ["en"]
 {{ content }}
   <div class="latest_posts">
     {%- if site.posts.size != 0 -%} 
-    {% assign lang = site.lang %}
-    <h2>Latest posts</h2>
+    <h2>Important posts:</h2>
     <ul class="post-list">
-      {%- assign date_format = site.data[lang].config.date_format -%}
-       {%- for post in site.posts -%}
+      {%- assign date_format = site.date_format -%}
+      {% assign posts = site.posts | where: "type","important" %}
+       {%- for post in posts -%}
       <li>
         <h3>
           <a class="post-link" href="{{post.url | absolute_url}}">
             {{ post.title | escape }}
-          </a>
+          </a> 
         </h3>
         <span class="post-meta">{{ post.date | date_to_string: date_format }}</span>
         {% if post.description %}
