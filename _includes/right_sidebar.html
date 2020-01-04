@@ -1,12 +1,10 @@
 <aside class="page_sidebar right_sidebar">
   {% if page.titles %}
-  <ul>
+  <div class="page_nav post_aside" id="page_nav">
     <h2>Titles:</h2>
     {% for item in page.titles %}
-    <li>
-      <a href="#{{item | split: ' ' | join: '-' | downcase | remove: '/'}}">{{item}}</a>
-    </li>
+      <a href="#{{item | split: ' ' | join: '-' | downcase | remove: '/'}}" class="in_link">{{item}}</a>
     {% endfor %}
-  </ul>
+  </div>
   {% endif %}
 </aside>

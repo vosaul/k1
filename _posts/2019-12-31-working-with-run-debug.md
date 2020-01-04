@@ -10,6 +10,7 @@ categories: jekyll run debug
 tipue_search_active: true
 exclude_from_search: false
 tags: [jekyll, code]
+type: important
 ---
 
 To run or debug your code in PyCharm, you can use numerous run/debug configurations. Each run/debug configuration represents a named set of run/debug startup properties. When you perform run, debug, or test operations with PyCharm, you always start a process based on one of the existing configurations using its parameters.

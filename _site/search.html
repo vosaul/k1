@@ -18,7 +18,15 @@
 <link rel="stylesheet" href="http://localhost:4000/assets/main.css">
 <link rel="shortcut icon" href="http://localhost:4000/assets/img/favicon.ico" type="image/x-icon" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  </head><body><header class="top_header">
+  
+<!--
+<link rel="stylesheet" href="http://localhost:4000/assets/tipuesearch/css/normalize.css">
+<link rel="stylesheet" href="http://localhost:4000/assets/tipuesearch/tipuesearch.css">
+-->
+<script src="http://localhost:4000/assets/tipuesearch/tipuesearch_content.js"></script>
+<script src="http://localhost:4000/assets/tipuesearch/tipuesearch_set.js" ></script>
+<script src="http://localhost:4000/assets/tipuesearch/tipuesearch.min.js" ></script>
+</head><body><header class="top_header">
   <a href="http://localhost:4000" class="logo">Logo</a>
   <form class="top_search" action="http://localhost:4000/search">
     <div class="tipue_search_left">
@@ -220,27 +228,10 @@
   </div>
 </aside>
 		<div>
-			<style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
-
-<div class="container">
-  <h1>404</h1>
-
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
-</div>
-
+			<section class="search_box">
+  <h1>Search result:</h1>
+  <div id="tipue_search_content"></div>
+</section>
 		</div>
 		<aside class="page_sidebar right_sidebar">
   
@@ -260,5 +251,12 @@
     
   </script>
   -->
+  <!-- -->
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+  <script src="http://localhost:4000/js/main.js"></script>
   <!-- --></body>
 </html>
