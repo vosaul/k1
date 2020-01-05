@@ -20,6 +20,11 @@ $(document).ready(function() {
     $(".page_toggler span").toggle();
     $(".page_nav").toggle();
   });
+
+  $(".in_link").click(function() {
+    $(".page_toggler span").toggle();
+    $(".page_nav").toggle();
+  });
 /*
   var myElement = document.getElementById('search_box');
   if (window.addEventListener) {
