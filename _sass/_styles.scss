@@ -243,20 +243,24 @@ footer {
     display: grid;
     display: -ms-grid;
     grid-template-columns: 1fr;
+    font-size: 15px;
+    h1 {
+      font-size: 30px;
+    }
   }
-.top_header {
-  grid-template-columns: 100px 1fr;
-  .top_search .tipue_search_icon {
-    width: 30px;
-}
-.tipue_search_right {
-  width: 80%;
-}
-}
-.page_sidebar .post_aside h2 {
+  .top_header {
+    grid-template-columns: 100px 1fr;
+    .top_search .tipue_search_icon {
+      width: 30px;
+    }
+    .tipue_search_right {
+      width: 80%;
+    }
+  }
+  .page_sidebar .post_aside h2 {
     margin: 40px 0 0;
     padding: 0;
-}
+  }
   .left_sidebar {
     .post_toggler {
       display: flex;
@@ -265,9 +269,10 @@ footer {
       border-radius: 8px;
       position: fixed;
       top: 75px;
-      left: 20px;
+      left: 10px;
       padding: 5px;
       text-align: center;
+      font-size: 18px;
       z-index: 1000;
       cursor: pointer;
       -webkit-border-radius: 8px;
@@ -282,16 +287,24 @@ footer {
     }
     .filters {
       position: fixed;
+      min-height: 400px;
       top: 120px;
       left: 0;
       background: #fff;
+      font-size: 18px;
     }
     .pal {
+      font-size: 18px;
       position: fixed;
       top: 80px;
-      left: 130px;
+      left: 0;
+      padding: 20px 0;
       background: #fff;
       width: 100%;
+      min-height: 440px;
+      * {
+        padding-left: 130px;
+      }
     }
   }
 
@@ -303,7 +316,7 @@ footer {
       border-radius: 8px;
       position: fixed;
       top: 75px;
-      right: 20px;
+      right: 10px;
       padding: 5px;
       text-align: center;
       z-index: 1000;
@@ -313,7 +326,7 @@ footer {
       -ms-border-radius: 8px;
       -o-border-radius: 8px;
       * {
-        font-size: 16px;
+        font-size: 18px;
         font-weight: normal;
         padding: 3px;
       }
@@ -321,9 +334,15 @@ footer {
     .page_nav {
       position: fixed;
       top: 90px;
-      right: 20px;
+      left: 0;
+      width: 100%;
       background: #fff;
+      font-size: 18px;
+      padding: 8px 30px 70px;
     }
+  }
+  .page-content p, .page-content li {
+    font-size: 18px;
   }
 }
 
@@ -334,7 +353,7 @@ footer {
 }
 @media screen and (max-width: 425px) {
   .top_header {
-    grid-template-columns: 1fr;;
+    grid-template-columns: 1fr;
     .top_search {
       margin: 10px auto;
       width: 90%;
