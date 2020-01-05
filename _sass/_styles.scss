@@ -17,7 +17,10 @@ body {
   border-bottom: 1px solid #bbb;
   align-items: center;
   display: grid;
-  grid-template-columns: 200px 1fr;
+  display: -ms-grid;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
   .logo {
     justify-self: center;
   }
@@ -50,7 +53,8 @@ body {
   min-height: 90vh;
   display: grid;
   display: -ms-grid;
-  grid-template-columns: 2fr 5fr 3fr;
+  grid-template-columns: 2fr 5fr 2fr;
+  -ms-grid-columns: 2fr 5fr 2fr;
   h1 {
     padding-top: 100px;
     letter-spacing: -0.5px;
