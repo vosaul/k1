@@ -10,7 +10,7 @@ $(document).ready(function() {
   });
 
   $(".post_toggler").click(function() {
-    $(".post_toggler span").toggle();
+    $(this).toggleClass("change");
     $(".filters").toggle();
     if ($(".page_nav:visible").length) {
       $(".page_toggler span").toggle();
@@ -21,50 +21,25 @@ $(document).ready(function() {
 
   $(".page_toggler").click(function() {
     if ($(".filters:visible").length) {
-      $(".post_toggler span").toggle();
+      $(".triangle::after").toggle();
       $(".filters, .pal").hide();
     };
-    $(".page_toggler span").toggle();
+    $(this).toggleClass("change");
     $(".page_nav").toggle();
   });
 
   $(".in_link").click(function() {
-    console.log("what???");
     $(".page_toggler span").toggle();
     if (screen.width < 1000) {
     $(".page_nav").toggle();
     };
   });
-/*
-  var myElement = document.getElementById('search_box');
-  if (window.addEventListener) {
-    // Normal browsers
-    myElement.addEventListener('DOMSubtreeModified', contentChanged, false);
-  } else
-    if (window.attachEvent) {
-      // IE
-      myElement.attachEvent('DOMSubtreeModified', contentChanged);
-    }
 
-  function contentChanged() {
-    // this function will run each time the content of the DIV changes
-  }
+  $(".search_toggler").click(function() {
+    $(".search_toggler").toggle();
+    $(".tipue_search_right ").toggle();
+  });
 
-
-     $(".tipue_search_icon").click(function() {
-      $(".tipue_search_close").toggleClass("hidden");
-      $(".tipue_search_right").toggleClass("hidden");
-      $(".tipue_search_icon").toggleClass("hidden");
-      $(".search_box").toggleClass("invisible");
-    });
-    
-   $(".tipue_search_close").click(function() {
-      $(".tipue_search_close").toggleClass("hidden");
-      $(".tipue_search_right").toggleClass("hidden");
-      $(".tipue_search_icon").toggleClass("hidden");
-      $(".search_box").toggleClass("invisible");
-    });
-*/
   // right sidebar scroll position indictor
   // Cache selectors
   var lastId,
