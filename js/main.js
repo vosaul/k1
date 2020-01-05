@@ -12,11 +12,18 @@ $(document).ready(function() {
   $(".post_toggler").click(function() {
     $(".post_toggler span").toggle();
     $(".filters").toggle();
+    if ($(".page_nav:visible").length) {
+      $(".page_toggler span").toggle();
+      $(".page_nav").toggle();
+    };
     $(".post_all").toggle();
-    $(".oal").hide();
   });
 
   $(".page_toggler").click(function() {
+    if ($(".filters:visible").length) {
+      $(".post_toggler span").toggle();
+      $(".filters, .pal").hide();
+    };
     $(".page_toggler span").toggle();
     $(".page_nav").toggle();
   });
