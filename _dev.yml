@@ -11,8 +11,8 @@ github_username:  jekyll
 
 # Build settings
 #theme: minima
-plugins:
-  - jekyll-feed
+#plugins:
+#  - jekyll-feed
 
 # Tipue search settings
 tipue_search:
