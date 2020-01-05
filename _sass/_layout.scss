@@ -214,26 +214,6 @@
   @include relative-font-size(1);
 }
 
-.post_aside {
-  * {
-      position: sticky;
-  }
-  //max-width: 280px;
-  text-align: left;
-  padding-left: $spacing-unit;
-  .post-link {
-    display: block;
-    @include relative-font-size(1);
-  }
-  .post-list-heading {
-    top: 70px;
-    @include relative-font-size(1.4);
-  }
-  .post-list {
-    top: 100px;
-  }
-}
-
 /**
  * Posts
  */

@@ -258,8 +258,8 @@ footer {
     }
   }
   .page_sidebar .post_aside h2 {
-    margin: 40px 0 0;
-    padding: 0;
+    margin: 30px 0 0;
+    padding-left: 130px;
   }
   .left_sidebar {
     .post_toggler {
@@ -302,7 +302,7 @@ footer {
       background: #fff;
       width: 100%;
       min-height: 440px;
-      * {
+      .out_link, details {
         padding-left: 130px;
       }
     }
