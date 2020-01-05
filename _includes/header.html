@@ -1,13 +1,25 @@
 <header class="top_header">
+    <div class="sandwich post_toggler ">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
   <a href="{{site.baseurl | site.url}}" class="logo">{{site.title}}</a>
   <form class="top_search" action="{{'search' | absolute_url }}">
-    <div class="tipue_search_left">
-      <div class="tipue_search_close hidden">✕</div>
-      <img src="{{ "/assets/tipuesearch/search.png" | absolute_url }}" class="tipue_search_icon">
+    <div class="tipue_search_right hidden">
+      <input type="text" name="q" id="tipue_search_input" class="tipue_search_input" pattern=".{3,}"
+        title="At least 3 characters" required>
     </div>
-    <div class="tipue_search_right ">
-      <input type="text" name="q" id="tipue_search_input" class="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required>
-    </div>
+        <div class="tipue_search_left">
+          <div class="tipue_search_close hidden">✕</div>
+          <img src="{{ "/assets/tipuesearch/search.png" | absolute_url }}" class="tipue_search_icon">
+        </div>
     <div style="clear: both;"></div>
   </form>
+
+  <div class="triangle page_toggler ">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+  </div>
 </header>
