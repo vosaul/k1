@@ -12,59 +12,46 @@
     <span class="choice active all" data-type="all">All</span>
   </div>
 
-<!-- grouped by year -->
+  <!-- grouped by year -->
+  {% assign postsByYear =
+    site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
   <div class="post_aside post_years pal hidden">
-    {%- if site.posts.size != 0 -%}
-    {% assign posts = site.posts %}
-    {% assign. last_post = posts | last %}
-    {% assign. first_post = posts | first %}
-    {% assign bottom_year = last_post.date | truncate: 4, '' %}
-    {% assign top_year = first_post.date | truncate: 4, '' %}
     <h2 class="post-list-heading">Posts by years</h2>
     <div class="post-list">
-  {% assign years = "" %}
-      {% for year in (bottom_year..top_year) %}
-        {% assign years = years | append: " " | append: year %}
-        {% endfor %}
-        {% assign years = years | split: " " | reverse %}
-        
-      {% for year in years %}
+      {% for year in postsByYear %}
       <details>
-        <summary class="post-meta">{{ year }}</summary>
-        {%- for post in site.posts -%}
-        {% assign post_year = post.date | truncate: 4, '' | plus: 0 }} %}
-        {%- if post_year == year -%}
+        <summary class="post-meta">{{ year.name }}</summary>
+        {% for post in year.items %}
         <a class="post-link" href="{{post.url | absolute_url}}">
           {{ post.title | escape }}
         </a>
-        {%- endif -%}
-        {%- endfor -%}
-      </details>
-      {% endfor %}
-    </div>
-    {% endif %}
-  </div>
-
-<!-- Grouped by categories -->
-    <div class="post_aside post_categories pal hidden">
-      <h2>Categories</h2>
-      {% assign categories = site.categories | sort %}
-      {% assign cats = site.posts | map: "categories" | uniq | sort %}
-      {% for cat in cats %}
-          {% for category in categories %}
-          {% if category[0] == cat %}
-      <details>
-        <summary>{{ cat }}</summary>
-        {% for post in category[1] %}
-        <a href="{{post.url | absolute_url}}">{{ post.title }}</a>
         {% endfor %}
       </details>
-      {% endif %}
-      {% endfor %}
       {% endfor %}
     </div>
+  </div>
+ 
 
-<!-- By tags -->
+  <!-- Grouped by categories -->
+  <div class="post_aside post_categories pal hidden">
+    <h2>Categories</h2>
+    {% assign categories = site.categories | sort %}
+    {% assign cats = site.posts | map: "categories" | uniq | sort %}
+    {% for cat in cats %}
+    {% for category in categories %}
+    {% if category[0] == cat %}
+    <details>
+      <summary>{{ cat }}</summary>
+      {% for post in category[1] %}
+      <a href="{{post.url | absolute_url}}">{{ post.title }}</a>
+      {% endfor %}
+    </details>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+  </div>
+
+  <!-- By tags -->
 
   <div class="post_aside post_tags pal hidden">
     <h2>Tags</h2>
@@ -76,7 +63,7 @@
     {% if tag_arr[0] == tag %}
     <details>
       <summary>{{ tag }}</summary>
-     <!--  <summary>{{ tag[0] }}</summary> -->
+      <!--  <summary>{{ tag[0] }}</summary> -->
       {% for post in tag_arr[1] %}
       <a href="{{post.url | absolute_url}}">{{ post.title }}</a>
       {% endfor %}
@@ -84,17 +71,17 @@
     {% endif %}
     {% endfor %}
     {% endfor %}
-    
+
   </div>
-  
-      <!-- All posts list -->
-      <div class="post_aside post_all pal hide_small">
-        <h2>All Posts:</h2>
-        {% for post in site.posts | sort_by: date | reverse %}
-        <a href="{{post.url | absolute_url}}" class="out_link
+
+  <!-- All posts list -->
+  <div class="post_aside post_all pal hide_small">
+    <h2>All Posts:</h2>
+    {% for post in site.posts | sort_by: date | reverse %}
+    <a href="{{post.url | absolute_url}}" class="out_link
             {% if post.url == page.url %} active{% endif %}">
-          {{post.title}}</a>
-        {% endfor %}
-      </div>
+      {{post.title}}</a>
+    {% endfor %}
+  </div>
 
 </aside>
