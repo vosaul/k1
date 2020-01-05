@@ -29,8 +29,11 @@ $(document).ready(function() {
   });
 
   $(".in_link").click(function() {
+    console.log("what???");
     $(".page_toggler span").toggle();
+    if (screen.width < 1000) {
     $(".page_nav").toggle();
+    };
   });
 /*
   var myElement = document.getElementById('search_box');
