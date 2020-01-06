@@ -14,6 +14,7 @@ exclude_from_search: false
 tags: [markdown, opera, github]
 type: important
 ---
+# Markdown Here
 
 [**Visit the website.**](http://markdown-here.com)<br>
 [**Get it for Chrome.**](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa)<br>

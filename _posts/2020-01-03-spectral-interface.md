@@ -14,11 +14,11 @@ type: important
 tipue_search_active: true
 exclude_from_search: false
 ---
+## Spectral Inference Networks (SpIN)
 
 SpIN requires a working installation of Python and TensorFlow. We recommend
 running it on GPU for faster convergence.
 
-## Spectral Inference Networks (SpIN)
 
 This package provides an implementation of Spectral Inference Networks,
 as in [Pfau, Petersen, Agarwal, Barrett and Stachenfeld (2018)](https://arxiv.org/abs/1806.02215).

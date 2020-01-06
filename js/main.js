@@ -18,7 +18,8 @@ $(document).ready(function() {
       $(".page_nav").toggle();
       $(".page_toggler").toggleClass("change");
     };
-    $(".post_all").toggle();
+    $(".left_sidebar").toggle();
+    $(".post_all, .filters").toggle();
   });
 
   $(".page_toggler").click(function() {

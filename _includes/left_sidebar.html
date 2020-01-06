@@ -1,5 +1,5 @@
-<aside class="left_sidebar page_sidebar">
-  <div class="filters hide_small">
+<aside class="left_sidebar page_sidebar hide_small">
+  <div class="filters ">
     <b>Arrange by:</b>
     <span class="choice years" data-type="years">Date</span>
     <span class="choice categories" data-type="categories">Category</span>
@@ -70,7 +70,7 @@
   </div>
 
   <!-- All posts list -->
-  <div class="post_aside post_all pal hide_small">
+  <div class="post_aside post_all pal default">
     <!-- <h2>All Posts:</h2> -->
     {% for post in site.posts | sort_by: date | reverse %}
     <a href="{{post.url | absolute_url}}" class="post_link
