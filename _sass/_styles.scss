@@ -423,6 +423,11 @@ footer {
     }
   }
   .left_sidebar .pal {
-    width: auto;
+    width: 60%;
+  }
+}
+@media screen and (max-width: 320px) {
+  .left_sidebar .pal {
+    width: 50%;
   }
 }
