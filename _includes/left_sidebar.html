@@ -1,23 +1,23 @@
 <aside class="left_sidebar page_sidebar">
   <div class="filters hide_small">
-    <h2>Filters:</h2>
-    <span class="choice years" data-type="years">Years</span>
-    <span class="choice categories" data-type="categories">Categories</span>
-    <span class="choice tags" data-type="tags">Tags</span>
+    <b>Arrange by:</b>
+    <span class="choice years" data-type="years">Date</span>
+    <span class="choice categories" data-type="categories">Category</span>
+    <span class="choice tags" data-type="tags">Tag</span>
     <span class="choice active all" data-type="all">All</span>
+    <hr>
   </div>
-
   <!-- grouped by year -->
   {% assign postsByYear =
     site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
   <div class="post_aside post_years pal hidden">
-    <h2 class="post-list-heading">Posts by years</h2>
+    <!-- <h2 class="post-list-heading">Posts by years</h2> -->
     <div class="post-list">
       {% for year in postsByYear %}
       <details>
         <summary class="post-meta">{{ year.name }}</summary>
         {% for post in year.items %}
-        <a class="post-link" href="{{post.url | absolute_url}}">
+        <a class="post_link" href="{{post.url | absolute_url}}">
           {{ post.title | escape }}
         </a>
         {% endfor %}
@@ -29,7 +29,7 @@
 
   <!-- Grouped by categories -->
   <div class="post_aside post_categories pal hidden">
-    <h2>Categories</h2>
+    <b>Categories</b>
     {% assign categories = site.categories | sort %}
     {% assign cats = site.posts | map: "categories" | uniq | sort %}
     {% for cat in cats %}
@@ -38,7 +38,7 @@
     <details>
       <summary>{{ cat }}</summary>
       {% for post in category[1] %}
-      <a href="{{post.url | absolute_url}}">{{ post.title }}</a>
+      <a class="post_link" href="{{post.url | absolute_url}}">{{ post.title }}</a>
       {% endfor %}
     </details>
     {% endif %}
@@ -49,7 +49,7 @@
   <!-- By tags -->
 
   <div class="post_aside post_tags pal hidden">
-    <h2>Tags</h2>
+    <b>Tags</b>
     {% assign tags = site.posts | map: "tags" | uniq | sort %}
     {% assign tags_arr = site.tags | sort %}
 
@@ -60,7 +60,7 @@
       <summary>{{ tag }}</summary>
       <!--  <summary>{{ tag[0] }}</summary> -->
       {% for post in tag_arr[1] %}
-      <a href="{{post.url | absolute_url}}">{{ post.title }}</a>
+      <a class="post_link" href="{{post.url | absolute_url}}">{{ post.title }}</a>
       {% endfor %}
     </details>
     {% endif %}
@@ -71,9 +71,9 @@
 
   <!-- All posts list -->
   <div class="post_aside post_all pal hide_small">
-    <h2>All Posts:</h2>
+    <!-- <h2>All Posts:</h2> -->
     {% for post in site.posts | sort_by: date | reverse %}
-    <a href="{{post.url | absolute_url}}" class="out_link
+    <a href="{{post.url | absolute_url}}" class="post_link
             {% if post.url == page.url %} active{% endif %}">
       {{post.title}}</a>
     {% endfor %}

@@ -109,9 +109,6 @@ body {
     text-align-last: left;
   }
 }
-.left_sidebar .post_aside {
-  top: 240px;
-}
 .page_sidebar {
   margin-top: 70px;
   .post_aside h2 {
@@ -173,11 +170,16 @@ body {
 }
 .left_sidebar {
   border-right: 1px solid #bbb;
+  .post_aside {
+    top: 280px;
+    height: 50vh;
+    overflow-y: auto;
+  }
 }
 .right_sidebar {
   border-left: 1px solid #bbb;
   .post_aside {
-    top: 42px;
+    top: 70px;
   }
   h2 {
     padding: 0;
@@ -341,7 +343,6 @@ footer {
     .filters {
       position: fixed;
       min-height: 400px;
-      top: 120px;
       left: 0;
       background: #fff;
       font-size: 18px;
@@ -349,16 +350,17 @@ footer {
     .pal {
       font-size: 18px;
       position: fixed;
-      top: 80px;
+      top: 50px;
       left: 0;
-      padding: 20px 0;
       background: #fff;
-      width: 100%;
       min-height: 440px;
-      .out_link,
-      details {
-        padding-left: 130px;
-      }
+      padding: 20px 0px 40px 120px;
+      width: 90%;
+      min-height: 440px;
+      max-height: 80vh;
+      overflow-y: auto;
+      border-bottom: 20px solid #fff;
+      border-top: 20px solid #fff;
     }
   }
 
@@ -390,7 +392,7 @@ footer {
         padding: 10px;
       }
       position: fixed;
-      top: 90px;
+      top: 70px;
       left: 0;
       width: 100%;
       background: #fff;
@@ -420,8 +422,6 @@ footer {
       }
     }
   }
-}
-@media screen and (max-width: 425px) {
   .left_sidebar .pal {
     width: auto;
   }

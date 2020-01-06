@@ -3,6 +3,7 @@ $(document).ready(function() {
   $(".choice").click(function() {
     var choice = $(this).data("type");
     var target = ".post_" + choice;
+    console.log(target);
     $(".choice").removeClass("active");
     $(this).addClass("active");
     $(".pal").hide();

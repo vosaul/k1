@@ -1,7 +1,7 @@
 <aside class="page_sidebar right_sidebar">
   {% if page.titles %}
   <div class="page_nav post_aside hide_small" id="page_nav">
-    <h2>Titles:</h2>
+    <b>On this page:</b>
     {% for item in page.titles %}
       <a href="#{{item | split: ' ' | join: '-' | downcase | remove: '/' | remove: '(' | remove: ')'}}" class="in_link">{{item}}</a>
     {% endfor %}

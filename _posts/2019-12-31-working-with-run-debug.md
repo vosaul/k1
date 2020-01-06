@@ -7,7 +7,7 @@ titles:
 - Code snippets
 - Check out the Jekyll docs
 date:   2019-12-31 08:40:50 +0200
-categories: jekyll run debug
+categories: [jekyll, run, debug]
 tipue_search_active: true
 exclude_from_search: false
 tags: [jekyll, code]

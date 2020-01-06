@@ -8,10 +8,13 @@ titles:
 - Create variables for simple MLP
 - Create function to construct simple MLP
 - Squared exponential kernel.
-
 tags: [spectral, python, network]
+categories: [spin, run, debug]
 type: important
+tipue_search_active: true
+exclude_from_search: false
 ---
+
 SpIN requires a working installation of Python and TensorFlow. We recommend
 running it on GPU for faster convergence.
 
