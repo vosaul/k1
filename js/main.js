@@ -19,7 +19,7 @@ $(document).ready(function() {
       $(".page_toggler").toggleClass("change");
     };
     $(".left_sidebar").toggle();
-    $(".post_all, .filters").toggle();
+    $(".default, .filters").toggle();
   });
 
   $(".page_toggler").click(function() {
@@ -33,7 +33,7 @@ $(document).ready(function() {
   });
 
   $(".in_link").click(function() {
-    $(".page_toggler span").toggle();
+    $(".page_toggler").toggleClass("change");
     if (screen.width < 1000) {
     $(".page_nav").toggle();
     };
