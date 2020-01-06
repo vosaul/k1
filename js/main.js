@@ -15,6 +15,7 @@ $(document).ready(function() {
     if ($(".page_nav:visible").length) {
       $(".page_toggler span").toggle();
       $(".page_nav").toggle();
+      $(".page_toggler").toggleClass("change");
     };
     $(".post_all").toggle();
   });
@@ -23,6 +24,7 @@ $(document).ready(function() {
     if ($(".filters:visible").length) {
       $(".triangle::after").toggle();
       $(".filters, .pal").hide();
+      $(".post_toggler").toggleClass("change");
     };
     $(this).toggleClass("change");
     $(".page_nav").toggle();

@@ -299,6 +299,7 @@ footer {
     font-size: 15px;
     h1 {
       font-size: 30px;
+      padding-top: 48px;
     }
   }
   .top_header {
@@ -383,6 +384,9 @@ footer {
       }
     }
     .page_nav {
+      h2 {
+        padding: 10px;
+      }
       position: fixed;
       top: 90px;
       left: 0;
