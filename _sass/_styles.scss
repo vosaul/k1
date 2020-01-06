@@ -47,6 +47,7 @@ body {
       width: 40px;
       vertical-align: middle;
       margin: 0 10px;
+      cursor: pointer;
     }
   }
 }
@@ -185,6 +186,7 @@ body {
 .tipue_search_close {
   text-align: center;
   color: #777;
+  cursor: pointer;
 }
 .search_box {
   z-index: 100;
