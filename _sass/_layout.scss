@@ -80,7 +80,6 @@
   }
 
   h4 {
-    text-align: center;
     @include relative-font-size(1.2);
     @include media-query($on-laptop) {
       @include relative-font-size(1.2);

@@ -5,7 +5,6 @@
     <span class="choice categories" data-type="categories">Category</span>
     <span class="choice tags" data-type="tags">Tag</span>
     <span class="choice active all" data-type="all">All</span>
-    <hr>
   </div>
   <!-- grouped by year -->
   {% assign postsByYear =
@@ -70,7 +69,7 @@
   </div>
 
   <!-- All posts list -->
-  <div class="post_aside post_all pal default">
+  <div class="post_aside post_all pal active">
     <!-- <h2>All Posts:</h2> -->
     {% for post in site.posts | sort_by: date | reverse %}
     <a href="{{post.url | absolute_url}}" class="post_link

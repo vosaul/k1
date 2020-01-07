@@ -4,28 +4,26 @@ $(document).ready(function() {
     var choice = $(this).data("type");
     var target = ".post_" + choice;
     console.log(target);
-    $(".choice").removeClass("active");
-    $(this).addClass("active");
+    $(".choice").removeClass("active").removeClass("default");
+    $(this).addClass("active").addClass("default");
     $(".pal").hide();
     $(target).show();
   });
 
   $(".post_toggler").click(function() {
     $(this).toggleClass("change");
-    $(".filters").toggle();
     if ($(".page_nav:visible").length) {
-      $(".page_toggler span").toggle();
       $(".page_nav").toggle();
       $(".page_toggler").toggleClass("change");
     };
     $(".left_sidebar").toggle();
-    $(".default, .filters").toggle();
   });
 
   $(".page_toggler").click(function() {
     if ($(".filters:visible").length) {
       $(".triangle::after").toggle();
-      $(".filters, .pal").hide();
+      //$(".filters, .pal").hide();
+      $(".left_sidebar").hide();
       $(".post_toggler").toggleClass("change");
     };
     $(this).toggleClass("change");
