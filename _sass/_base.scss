@@ -7,7 +7,6 @@ dl, dd, ol, ul, figure {
   margin: 0;
   padding: 0;
 }
-
 /**
  * Basic styling
  */
@@ -25,8 +24,6 @@ body {
   min-height: 100vh;
   flex-direction: column;
 }
-
-
 
 /**
  * Set `margin-bottom` to maintain vertical rhythm
@@ -63,8 +60,6 @@ figcaption {
   font-size: $small-font-size;
 }
 
-
-
 /**
  * Lists
  */
@@ -78,29 +73,25 @@ li {
     margin-bottom: 0;
   }
 }
-
-
-
 /**
  * Headings
  */
 h1, h2, h3, h4, h5, h6 {
   font-weight: $base-font-weight;
 }
-
 /**
  * Links
  */
 a {
-  color: $brand-color;
+  color: $link_color;
   text-decoration: none;
 
   &:visited {
-    color: darken($brand-color, 15%);
+    color: darken($link_color, 15%);
   }
 
   &:hover {
-    color: $text-color;
+    color: $text_color;
   }
 
   .social-media-list &:hover {
@@ -111,14 +102,12 @@ a {
     }
   }
 }
-
-
 /**
  * Blockquotes
  */
 blockquote {
   color: $grey-color;
-  border-left: 4px solid $grey-color-light;
+  border-left: 4px solid $link_color;
   padding-left: $spacing-unit / 2;
   @include relative-font-size(1.125);
   letter-spacing: -1px;
@@ -156,7 +145,6 @@ pre {
     padding-left: 0;
   }
 }
-
 
 
 /**

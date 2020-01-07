@@ -13,8 +13,8 @@ body {
   width: 100%;
   height: 70px;
   position: fixed;
-  background: #fff;
-  border-bottom: 1px solid #bbb;
+  background: $background-color;
+  border-bottom: $border;
   align-items: center;
   display: grid;
   display: -ms-grid;
@@ -24,7 +24,7 @@ body {
   align-items: center;
   .logo {
     justify-self: center;
-    font-size: 20px;
+    font-size: ($base-font-size + 5)x;
     text-align: center;
   }
 
@@ -32,10 +32,10 @@ body {
     position: relative;
     margin-right: 5%;
     .tipue_search_right {
-      border: 1px solid #bbb;
+      border: $border;
       position: absolute;
       width: 50vw;
-      right: 20px;
+      right: ($base-font-size + 5);
     }
     #tipue_search_input {
       height: 30px;
@@ -59,12 +59,12 @@ body {
   grid-template-columns: 2fr 5fr 2fr;
   -ms-grid-columns: 2fr 5fr 2fr;
   h1 {
-    padding-top: 30px;
+    padding-top: 100px;
     letter-spacing: -0.5px;
-    color: #27282c;
+    color: $title_color;
     font-family: "Gotham SSm A", "Gotham SSm B", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       Oxygen, Ubuntu, Cantarell, "Droid Sans", "Helvetica Neue", Arial, sans-serif;
-    font-size: 40px;
+    font-size: ($base-font-size * 2.5);
     font-weight: 900;
     line-height: 48px;
     text-align: left;
@@ -73,10 +73,10 @@ body {
   h2 {
     //padding-top: 160px;
     letter-spacing: -0.5px;
-    color: #27282c;
+    color: $title_color;
     font-family: "Gotham SSm A", "Gotham SSm B", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       Oxygen, Ubuntu, Cantarell, "Droid Sans", "Helvetica Neue", Arial, sans-serif;
-    font-size: 31px;
+    font-size: ($base-font-size * 2);
     font-weight: 700;
     line-height: 40px;
     margin-top: 48px;
@@ -84,10 +84,10 @@ body {
   }
   h3 {
     letter-spacing: normal;
-    color: #27282c;
+    color: $title_color;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
       "Droid Sans", "Helvetica Neue", Arial, sans-serif;
-    font-size: 20px;
+    font-size: ($base-font-size * 1.25);
     font-weight: bold;
     line-height: 28px;
     margin-top: 48px;
@@ -96,12 +96,12 @@ body {
   p,
   li {
     letter-spacing: normal;
-    color: rgba(39, 40, 44, 0.7);
+    color: $text_color;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
       "Droid Sans", "Helvetica Neue", Arial, sans-serif;
-    font-size: 15px;
+    font-size: ($base-font-size);
     font-weight: normal;
-    line-height: 24px;
+    line-height: $base-line-height;
     //max-width: 706px;
     color: inherit;
   }
@@ -115,8 +115,8 @@ body {
     margin: 40px 0 10px;
   }
   .active {
-    font-weight: 800;
-    color: #000;
+    font-weight: 700;
+    color: $active_color;
     text-decoration: underline;
   }
   a {
@@ -124,7 +124,7 @@ body {
     padding: 8px 10px;
     cursor: pointer;
     &:hover {
-      background: #ddd;
+      background: $bg_hover;
     }
   }
   h2 {
@@ -134,14 +134,14 @@ body {
   summary {
     padding: 8px 10px;
     &:hover {
-      background: #ddd;
+      background: $bg_hover;
     }
   }
   .choice {
     display: block;
     padding: 8px 10px;
     &:hover {
-      background: #ddd;
+      background: $bg_hover;
       cursor: pointer;
     }
   }
@@ -155,7 +155,7 @@ body {
     position: sticky;
     list-style: none;
     letter-spacing: normal;
-    color: rgba(39, 40, 44, 0.7);
+    color: $text_color;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
       "Droid Sans", "Helvetica Neue", Arial, sans-serif;
     font-size: 12px;
@@ -169,7 +169,7 @@ body {
   }
 }
 .left_sidebar {
-  border-right: 1px solid #bbb;
+  border-right: $border;
   .post_aside {
     top: 280px;
     height: 50vh;
@@ -177,7 +177,7 @@ body {
   }
 }
 .right_sidebar {
-  border-left: 1px solid #bbb;
+  border-left: $border;
   .post_aside {
     top: 70px;
   }
@@ -187,7 +187,7 @@ body {
 }
 .tipue_search_close {
   text-align: center;
-  color: #777;
+  color: $text_color;
   cursor: pointer;
 }
 .search_box {
@@ -212,11 +212,11 @@ body {
       display: none;
     }
     .tipue_search_content_text {
-      font-size: 15px;
+      font-size: $base-font-size;
       font-weight: 400;
       .tipue_search_content_bold {
         font-weight: 600;
-        color: #000;
+        color: $text_color;
         background: rgb(210, 209, 238);
       }
     }
@@ -238,12 +238,12 @@ footer {
   grid-auto-rows: 57px;
   align-items: center;
   justify-items: center;
-  font-size: 15px;
+  font-size: $base-font-size;
   font-weight: 400;
-  border-top: 1px solid #aaa;
-  background: #eee;
+  border-top: $border;
+  background: $bg_footer;
 }
-@media screen and (max-width: 999px) {
+@media screen and (max-width: ($on-laptop - 1)) {
   .hide_small,
   .default {
     display: none;
@@ -261,7 +261,7 @@ footer {
     height: 0;
     border-style: solid;
     border-width: 22px 11px 0 11px;
-    border-color: transparent #fff #fff #fff;
+    border-color: transparent $background-color $background-color $background-color;
   }
   .sandwich,
   .triangle {
@@ -273,7 +273,7 @@ footer {
   .bar3 {
     width: 22px;
     height: 3px;
-    background-color: #333;
+    background-color: $text_color;
     margin: 4px 0;
     transition: 0.4s;
   }
@@ -301,9 +301,9 @@ footer {
     display: grid;
     display: -ms-grid;
     grid-template-columns: 1fr;
-    font-size: 15px;
+    font-size: $base-font-size;
     h1 {
-      font-size: 30px;
+      font-size: ($base-font-size * 2);
       margin-top: 48px;
     }
   }
@@ -320,15 +320,15 @@ footer {
   .left_sidebar {
     .post_toggler {
       display: flex;
-      background: #fff;
-      border: 1px solid #ddd;
+      background: $background-color;
+      border: 1px solid $bg_hover;
       border-radius: 8px;
       position: fixed;
       top: 75px;
       left: 10px;
       padding: 5px;
       text-align: center;
-      font-size: 18px;
+      font-size: ($base-font-size + 2);
       z-index: 1000;
       cursor: pointer;
       -webkit-border-radius: 8px;
@@ -336,7 +336,7 @@ footer {
       -ms-border-radius: 8px;
       -o-border-radius: 8px;
       * {
-        font-size: 16px;
+        font-size: $base-font-size;
         font-weight: normal;
         padding: 3px;
       }
@@ -345,31 +345,31 @@ footer {
       position: fixed;
       min-height: 400px;
       left: 0;
-      background: #fff;
-      font-size: 18px;
+      background: $background-color;
+      font-size: ($base-font-size + 2);
     }
     .pal {
-      font-size: 18px;
+      font-size: ($base-font-size + 2);
       position: fixed;
       top: 50px;
       left: 0;
-      background: #fff;
+      background: $background-color;
       min-height: 440px;
       padding: 20px 0px 40px 120px;
       width: 90%;
       min-height: 440px;
       max-height: 80vh;
       overflow-y: auto;
-      border-bottom: 20px solid #fff;
-      border-top: 20px solid #fff;
+      border-bottom: 20px solid $background-color;
+      border-top: 20px solid $background-color;
     }
   }
 
   .right_sidebar {
     .page_toggler {
       display: flex;
-      background: #fff;
-      border: 1px solid #ddd;
+      background: $background-color;
+      border: 1px solid $bg_hover;
       border-radius: 8px;
       position: fixed;
       top: 75px;
@@ -383,7 +383,7 @@ footer {
       -ms-border-radius: 8px;
       -o-border-radius: 8px;
       * {
-        font-size: 18px;
+        font-size: ($base-font-size + 2);
         font-weight: normal;
         padding: 3px;
       }
@@ -396,18 +396,18 @@ footer {
       top: 70px;
       left: 0;
       width: 100%;
-      background: #fff;
-      font-size: 18px;
+      background: $background-color;
+      font-size: ($base-font-size +2);
       padding: 8px 30px 70px;
     }
   }
   .page-content p,
   .page-content li {
-    font-size: 18px;
+    font-size: ($base-font-size +2);
   }
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: $on-laptop) {
   .hide_large {
     display: none;
   }
