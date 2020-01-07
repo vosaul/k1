@@ -43,6 +43,8 @@ _Customized themes are synced with local session storage_
 
 🔥 **PWA**: Install as a [PWA](https://developers.google.com/web/progressive-web-apps) on your device.
 
+## Financial Contributors
+
 **Features:**
  - Instant loading with [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers)
  - Offline support
@@ -63,6 +65,8 @@ _Customized themes are synced with local session storage_
  - Copy generated request code to clipboard
  - Import `cURL`
  - Label requests
+
+## Code Contributors
 
 🔌 **WebSocket**: Establish full-duplex communication channels over a single TCP connection.
 
@@ -205,6 +209,8 @@ _Add-ons are developed and maintained under **[Official Postwoman Organization](
 ## Demo 🚀 [![Website](https://img.shields.io/website?url=https%3A%2F%2Fpostwoman.io&logo=Postwoman)](https://postwoman.io)
 
 [postwoman.io](https://postwoman.io)
+
+## Badges
 
 <a href="https://www.netlify.com">
   <img src="https://www.netlify.com/img/global/badges/netlify-light.svg"/>

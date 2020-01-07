@@ -7,14 +7,14 @@ titles:
 - Usage
 - Create variables for simple MLP
 - Create function to construct simple MLP
-- Squared exponential kernel.
+- Squared exponential kernel
 tags: [spectral, python, network]
 categories: [spin, run, debug]
 type: important
 tipue_search_active: true
 exclude_from_search: false
 ---
-## Spectral Infer`ence Networks (SpIN)
+## Spectral Inference Networks (SpIN)
 
 SpIN requires a working installation of Python and TensorFlow. We recommend
 running it on GPU for faster convergence.
@@ -74,7 +74,7 @@ def network(x):
   return tf.matmul(h1, w2) + b2
 
 data = tf.random.normal([batch_size, input_dim])  # replace with actual data
-## Squared exponential kernel.
+## Squared exponential kernel
 kernel = lambda x, y: tf.exp(-(tf.norm(x-y, axis=1, keepdims=True)**2))
 linop = spin.KernelOperator(kernel)
 optim = tf.train.AdamOptimizer()
