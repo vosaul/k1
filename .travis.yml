@@ -1,7 +1,7 @@
 language: ruby
 env:
   global:
-    - secure: <encrypted_env_vars> # See AEROBATIC_API_KEY below
+    - secure: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcGlLZXkiOnRydWUsImN1c3RvbWVySWQiOiI0ODRkNmMwNC1mMzUwLTQyMGQtYWRjZi1hMzJhNWM0ZGVjMWYiLCJ0aW1lc3RhbXAiOjE1ODY0MzA1MzE2OTh9.ol4ZnxFpfP-WDSeWND1OsKStupQ85tOiFZV5Os6kwZk'
     - TRAVIS_NODE_VERSION="6.9.5"
 install:
   - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm
