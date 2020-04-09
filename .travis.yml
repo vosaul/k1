@@ -15,5 +15,4 @@ script:
 - jekyll build
 after_success:
 - npm install aerobatic-cli -g
-- aero deploy     --commit-url "https://github.com/vosaul/k1.git"     --directory
-  _site
+- aero deploy     --commit-url "https://github.com/vosaul/k1.git"     --directory _site
