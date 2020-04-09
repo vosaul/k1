@@ -14,5 +14,5 @@ install:
 script:
 - echo "url: https://!!baseurl!!" >> _config.yml
 - bundle exec jekyll build
-after_success:
-- aero deploy -d _site
+- after_success:
+  - aero deploy     --commit-url "https://github.com/owner/repo-name/commit/${TRAVIS_COMMIT}"    --directory _site
