@@ -9,11 +9,10 @@ install:
   - source ~/.nvm/nvm.sh
   - nvm install $TRAVIS_NODE_VERSION
   - gem install bundler jekyll
-  #- bundle install --path vendor/bundle
+  - bundle install --path vendor/bundle
   - npm install
 script:
   - jekyll build
 after_success:
   - npm install aerobatic-cli -g
   - aero deploy     --commit-url "https://github.com/vosaul/k1/master/${TRAVIS_COMMIT}"     --directory _site
-  
