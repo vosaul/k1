@@ -2,7 +2,7 @@ language: ruby
 env:
   global:
   - TRAVIS_NODE_VERSION="6.9.5"
-  - secure: LEzxenJrLI0mBVoijQPlNZJEBi/bfPFizwnI7kX1M/AMeTFwysTCNQXapTkKFST3n+WJ3ag1yWosDR4JrG/ZN9Yj770oIma70lrIA4sKKV5pRN+B8vFOIvHz5Lf0FEkBgcTiw+uHWTiPWz46AUr3ldKa6dhLK00p+DvhZUDTEDeAfnFn5FarRAOqj8A6CSXNN92o86WEHWC1s0CeoJtSy74woiC280285ddWyPKsgBm5i2vyYOiNQ00JohqZp10DY3Ptq+ejR32IXBOOYj+j/KWdRs19djNPWMY/OcZJ9R0FIo2xiZDrJkmDyiKiwfMru8E40jvITIWLCVW9ByR7p2jSP3SA4wYI/0tkS/VQ/qrr+op7L22YCambOvjMXZsPRBD2rY2K3nhkUjQVgkXOoVay1jr3px34ITuU9ALjeCBat9TrJEPJHq8142ajpzlheTqH6rFm0btb0iXBizHwQuy3ghViqXSn3SlIR+wptb5VC1KH5f7EGq0LkXxTAm7OMZLPzGwBsxkX8UccC/a9/RdfOC19e2pJ5M487JjZez2FBvueyd3BJGUePiI6p/4uh3kUTzEJxS/Tok0rtOGbium8+bL91pr3bcfbQVFN+RLws8D6aG0c576TmaNRnIxXnVwkBH8he8Eyip08jhAmr4GKGLxnSgYhNFZEdhX3EDw=
+  - secure: "YWiYYVWnQOGTDdS1gLWB2U8aH34/W71FYaisLW25LN6+l6pertWKbDuFlMkbpWptIp0w8hgFu1yOHGDHjHkvzog3yEgwqMCeuiGzFsS06tuzTREMgGe0QmHGgHiHHUdDbGlcBXY60K6JMFHsiNeTx83TSsLzR9B3/Ez4brjvF3BiOYub5wFp/0DNJQOwpEZc+YBIAkiVm2HwfiDHbHMTLQeRds1jLGWFFKDirWHGcjeiuzqoH+XB25Sez6ozyf6tB5vnPR3nudbPRqBWdQaI+z14SHBHkeIWxnuvqSP0+USyJvWWrJ+PGiV8PYxKXXZ159AlP+VBRczh46EWiMpmnuGFOkmrZ8UwtJRPcQUWJVqx7UkzuGN4I20/ZsJPHe0M6j1PG/G5T3XEAxHSY3AlyWh068avh3NwAAjcHatmJBPHvzrq2HeQpQIowjbRDLsm3vdjNxsJ/me5eHvHz6gC7IE9e2+Suv2cI0Jm5/NgaX0LsDjoitk9EV7oyJn6vgAwDEVjwRjEpXVIGr1n1QI3JgUtn+JF//p+EvvwLySOHkxvexv5ymXF4HAg3JbxWPSk/LV/qzX2tZjHpZYFVufyV5pHFMvM1UjYF3l9azFoAMOINNWNCgnkUEvd773BwJ1RUQM4ULCuQ/J3VKKbAT7P5jpG9P6Bu/p5zhgesqxRVw4="
 install:
 - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm
 - "(cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`)"
@@ -13,6 +13,6 @@ install:
 - npm install
 script:
 - jekyll build
-after_success:
-- npm install aerobatic-cli -g
-- aero deploy     --commit-url "https://github.com/vosaul/k1.git"     --directory _site
+- after_success:
+  - npm install aerobatic-cli -g
+  - aero deploy     --commit-url "https://github.com/owner/repo-name/commit/${TRAVIS_COMMIT}"    --directory _site
