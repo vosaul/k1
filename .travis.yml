@@ -1,7 +1,7 @@
 language: ruby
 env:
   global:
-    - secure: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcGlLZXkiOnRydWUsImN1c3RvbWVySWQiOiI0ODRkNmMwNC1mMzUwLTQyMGQtYWRjZi1hMzJhNWM0ZGVjMWYiLCJ0aW1lc3RhbXAiOjE1ODY0MzA1MzE2OTh9.ol4ZnxFpfP-WDSeWND1OsKStupQ85tOiFZV5Os6kwZk
+    - secure: "Rk/lcIqLW1ZwHrn1RSB2oyCU71xSHVDZ2zkXe1utdZAdxA3YOn5AhLzV17GPCnKoZdtzLDQtJvFXsqJ21/jzU68eY3nOynhAg8qLWtP3hu25OJC1WcWa4q9RhooL+ytDea1jYxrH6caUhHAEc9zjxcgJBTOrDD9T2Yt6lC6Z2Ni55NAiRTw0MN0HZDu5b3HlA7b0MJc68Ww7PL3zZnze+obfJeibUSQYldT+QxI0U1QgA/OjUfjBV/qezS9lFLJI0h5fGuwfbzVBzs9CcJzR9MML7D5uLzUhhwPnkNtxbZVL3HqvFKM19q1jQkpB6InWf9Wr+gsGfWEal9msdxoBFOOMfOJUhJ39/+rbewfwkIJmFoCPo2GfDLB+SXgajAZtK2HbXwWlyo29AZrwY3YAT8X8ndtmYDg+m1wd3sejf0CJ2VByFbtpzAaYmLK4VxieGjHfL+hBUv+2i/nr1zb7KsFG4OB4/g1xP9i/73NGVCgxgV7r7pFqZbqD9pqicGz9Sqs9D40YcoL+//WiB7ZmcY2ySEzEQnaG12cXen5MugYqFx6w5qtXw1niNGvXVTLAQa+L8eayi9dKa2BR4K59CBM87dwiOsU8b9pfrASXORQ4Yinf3bzegz5lmQf0388JzS7j5oI/DosE8gBoXFdW0Kfb4its7XOCBHYjPBQL96k="
     - TRAVIS_NODE_VERSION="6.9.5"
 install:
   - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm
