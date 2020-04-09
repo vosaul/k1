@@ -6,13 +6,14 @@ env:
   matrix:
     secure: ggpadUWUIDEnQJRfvqhbO2PGMey5/6dvnStMlGVFVgURsoDEY0B7rcg5dBc8dsFaK7qtRcomU59YSbgK6UaiPFcO+0zHaz7slTKMbkqV/a6S3AYh7CYGDRUN48wceFZ7KwuD7hDvfMMnxRq3cmbKUh/0fuoBii9ykxHmBV0LRiVbzlTPgPy/enPit8FcBoZ0Dt3pIWx1QIsha4AYSj1B81/XUcpBK67XGhqbanpIRA8GlwyhrvZM6KeHabY5atyXnqkyS5UycMASkvjistywzKbqkV6JrRdf9CtBZ8vJYohyqV+Vb1Vt36kRlNburpqSH18E02RvLO0ve2w8K7/P3GQ2W9yosTojpFSw3dLj0YwUbYwSp7CAvB3+tROXDKf9Shprs2dtusBMUTegGEVeetqliCjWEBm+8zvDybipPhcctvfxV+CynbiRfCbOo6fTSeBpxjUc+EXGAiaXRNshja7MEnUwk+B7/BOkmZMFcHC1lgYi29W+5ZA6eGiNBkU6mTu09bpSJc9uzMEzosTk1bArSTSeJQLyBj9EljErTWJSwgjRQz+Jhb1I/sHt2GLssEYKWxWjFh5ughOEvd2cjE3X5uzzn8KvPyO+zVThgLeeu+jyreWlyetxIteza4wdrZQCjpHfMibzdUxG1eD1q7CAlKpka/zaCkPxNBoqxU4=
 install:
-- rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm
-  && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm
-  install $TRAVIS_NODE_VERSION
-- npm install aerobatic-cli -g
-- bundle install --path vendor/bundle
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm
+  - (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`)
+  - source ~/.nvm/nvm.sh
+  - nvm install $TRAVIS_NODE_VERSION
+  - bundle install --path vendor/bundle
+  - npm install
 script:
-- echo "url: https://!!baseurl!!" >> _config.yml
-- bundle exec jekyll build
-- after_success:
-  - aero deploy     --commit-url "https://github.com/owner/repo-name/commit/${TRAVIS_COMMIT}"    --directory _site
+  - bundle exec jekyll build
+after_success:
+  - npm install aerobatic-cli -g
+  - aero deploy     --commit-url "https://github.com/owner/repo-name/commit/${TRAVIS_COMMIT}"     --directory _site
