@@ -15,4 +15,5 @@ script:
   - jekyll build
 after_success:
   - npm install aerobatic-cli -g
+  - aero login
   - aero deploy     --commit-url "https://github.com/vosaul/k1/master/${TRAVIS_COMMIT}"     --directory _site
