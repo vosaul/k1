@@ -5,3 +5,4 @@ _Mockup/
 vendor
 _site/
 _site/feed.xml
+Gemfile.lock
