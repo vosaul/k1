@@ -1,18 +1,19 @@
 language: ruby
 env:
   global:
-    - secure: "Rk/lcIqLW1ZwHrn1RSB2oyCU71xSHVDZ2zkXe1utdZAdxA3YOn5AhLzV17GPCnKoZdtzLDQtJvFXsqJ21/jzU68eY3nOynhAg8qLWtP3hu25OJC1WcWa4q9RhooL+ytDea1jYxrH6caUhHAEc9zjxcgJBTOrDD9T2Yt6lC6Z2Ni55NAiRTw0MN0HZDu5b3HlA7b0MJc68Ww7PL3zZnze+obfJeibUSQYldT+QxI0U1QgA/OjUfjBV/qezS9lFLJI0h5fGuwfbzVBzs9CcJzR9MML7D5uLzUhhwPnkNtxbZVL3HqvFKM19q1jQkpB6InWf9Wr+gsGfWEal9msdxoBFOOMfOJUhJ39/+rbewfwkIJmFoCPo2GfDLB+SXgajAZtK2HbXwWlyo29AZrwY3YAT8X8ndtmYDg+m1wd3sejf0CJ2VByFbtpzAaYmLK4VxieGjHfL+hBUv+2i/nr1zb7KsFG4OB4/g1xP9i/73NGVCgxgV7r7pFqZbqD9pqicGz9Sqs9D40YcoL+//WiB7ZmcY2ySEzEQnaG12cXen5MugYqFx6w5qtXw1niNGvXVTLAQa+L8eayi9dKa2BR4K59CBM87dwiOsU8b9pfrASXORQ4Yinf3bzegz5lmQf0388JzS7j5oI/DosE8gBoXFdW0Kfb4its7XOCBHYjPBQL96k="
-    - TRAVIS_NODE_VERSION="6.9.5"
+  - TRAVIS_NODE_VERSION="6.9.5"
+  - secure: LEzxenJrLI0mBVoijQPlNZJEBi/bfPFizwnI7kX1M/AMeTFwysTCNQXapTkKFST3n+WJ3ag1yWosDR4JrG/ZN9Yj770oIma70lrIA4sKKV5pRN+B8vFOIvHz5Lf0FEkBgcTiw+uHWTiPWz46AUr3ldKa6dhLK00p+DvhZUDTEDeAfnFn5FarRAOqj8A6CSXNN92o86WEHWC1s0CeoJtSy74woiC280285ddWyPKsgBm5i2vyYOiNQ00JohqZp10DY3Ptq+ejR32IXBOOYj+j/KWdRs19djNPWMY/OcZJ9R0FIo2xiZDrJkmDyiKiwfMru8E40jvITIWLCVW9ByR7p2jSP3SA4wYI/0tkS/VQ/qrr+op7L22YCambOvjMXZsPRBD2rY2K3nhkUjQVgkXOoVay1jr3px34ITuU9ALjeCBat9TrJEPJHq8142ajpzlheTqH6rFm0btb0iXBizHwQuy3ghViqXSn3SlIR+wptb5VC1KH5f7EGq0LkXxTAm7OMZLPzGwBsxkX8UccC/a9/RdfOC19e2pJ5M487JjZez2FBvueyd3BJGUePiI6p/4uh3kUTzEJxS/Tok0rtOGbium8+bL91pr3bcfbQVFN+RLws8D6aG0c576TmaNRnIxXnVwkBH8he8Eyip08jhAmr4GKGLxnSgYhNFZEdhX3EDw=
 install:
-  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm
-  - (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`)
-  - source ~/.nvm/nvm.sh
-  - nvm install $TRAVIS_NODE_VERSION
-  - gem install bundler jekyll
-  - bundle install --path vendor/bundle
-  - npm install
+- rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm
+- "(cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`)"
+- source ~/.nvm/nvm.sh
+- nvm install $TRAVIS_NODE_VERSION
+- gem install bundler jekyll
+- bundle install --path vendor/bundle
+- npm install
 script:
-  - jekyll build
+- jekyll build
 after_success:
-  - npm install aerobatic-cli -g
-  - aero deploy     --commit-url "https://github.com/vosaul/k1.git"     --directory _site
+- npm install aerobatic-cli -g
+- aero deploy     --commit-url "https://github.com/vosaul/k1.git"     --directory
+  _site
