@@ -8,8 +8,8 @@ install:
   - (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`)
   - source ~/.nvm/nvm.sh
   - nvm install $TRAVIS_NODE_VERSION
-#  - bundle install --path vendor/bundle
-#  - npm install
+  - bundle install --path vendor/bundle
+  - npm install
 script:
   - jekyll build
 after_success:
